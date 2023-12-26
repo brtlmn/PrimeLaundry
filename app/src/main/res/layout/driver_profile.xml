@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/saveEditProfileDriver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="211dp"
+            android:layout_marginEnd="40dp"
+            android:text="SAVE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressEditTextDriver" />
+
+        <TextView
+            android:id="@+id/history4"
+            android:layout_width="45dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="264dp"
+            android:text="History"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/historyLogo4" />
+
+        <TextView
+            android:id="@+id/home4"
+            android:layout_width="42dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:text="Home"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/primeLaundryLogoHome4" />
+
+        <TextView
+            android:id="@+id/status4"
+            android:layout_width="47dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="100dp"
+            android:text="Status"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusLogo4" />
+
+        <TextView
+            android:id="@+id/account4"
+            android:layout_width="52dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="28dp"
+            android:text="Account"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/accountLogo5" />
+
+        <TextView
+            android:id="@+id/booking4"
+            android:layout_width="52dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="180dp"
+            android:text="Booking"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookingLogo4" />
+
+        <TextView
+            android:id="@+id/textAppsName3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="101dp"
+            android:fontFamily="@font/abril_fatface"
+            android:text="Prime Laundry"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/accountCustomer"
+            android:layout_width="278dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            android:text="Account"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textAppsName3" />
+
+        <ImageView
+            android:id="@+id/accountLogo2"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="288dp"
+            android:background="@drawable/account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/accountCustomer" />
+
+        <ImageView
+            android:id="@+id/historyLogo4"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="644dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/history"
+            app:layout_constraintEnd_toStartOf="@+id/bookingLogo4"
+            app:layout_constraintStart_toEndOf="@+id/primeLaundryLogoHome4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/accountLogo5"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="644dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/statusLogo4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/statusLogo4"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="644dp"
+            android:background="@drawable/status"
+            app:layout_constraintStart_toEndOf="@+id/bookingLogo4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/primeLaundryLogoHome4"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="644dp"
+            android:background="@drawable/logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bookingLogo4"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="644dp"
+            android:layout_marginEnd="148dp"
+            android:background="@drawable/booking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameCall"
+            android:layout_width="107dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="82dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="148dp"
+            android:text="TextView"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toEndOf="@+id/accountLogo2"
+            app:layout_constraintTop_toBottomOf="@+id/accountCustomer" />
+
+
+        <TextView
+            android:id="@+id/driverProfile"
+            android:layout_width="62dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="82dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="148dp"
+            android:text="DRIVER"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/accountLogo2"
+            app:layout_constraintTop_toBottomOf="@+id/nameCall" />
+
+        <TextView
+            android:id="@+id/emailAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="32dp"
+            android:text="EMAIL:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/accountLogo2" />
+
+        <TextView
+            android:id="@+id/emailCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/emailAccount"
+            app:layout_constraintTop_toBottomOf="@+id/accountLogo2" />
+
+        <TextView
+            android:id="@+id/licenseNumCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/licenseNumber"
+            app:layout_constraintTop_toBottomOf="@+id/addressEditTextDriver" />
+
+        <TextView
+            android:id="@+id/emailAccount2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="16dp"
+            android:text="NO.PHONE:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailAccount" />
+
+
+        <EditText
+            android:id="@+id/phoneNumEditTextDriver"
+            android:layout_width="156dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintStart_toEndOf="@+id/emailAccount2"
+            app:layout_constraintTop_toBottomOf="@+id/emailCall" />
+
+        <TextView
+            android:id="@+id/addressCustProf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="16dp"
+            android:text="ADDRESS:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailAccount2" />
+
+
+        <TextView
+            android:id="@+id/licenseNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="16dp"
+            android:text="LICENSE NUM:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressCustProf" />
+
+        <EditText
+            android:id="@+id/addressEditTextDriver"
+            android:layout_width="157dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintStart_toEndOf="@+id/addressCustProf"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumEditTextDriver" />
+
+        <TextView
+            android:id="@+id/icNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="16dp"
+            android:text="IC NUM:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/licenseNumber" />
+
+
+        <TextView
+            android:id="@+id/icNumCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/icNum"
+            app:layout_constraintTop_toBottomOf="@+id/licenseNumCall" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

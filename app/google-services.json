@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "351797538548",
+    "project_id": "prime-laundry-fyp",
+    "storage_bucket": "prime-laundry-fyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351797538548:android:7a542b1ef5b58a66ec38a1",
+        "android_client_info": {
+          "package_name": "com.example.primelaundryfyp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs3HIij1IlvWNuAZr-0ybATk3WFfH19o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+    <application
+
+
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PrimeLaundryFYP"
+        tools:targetApi="31">
+
+
+        <activity android:name=".Admin.registerAdmin"/>
+        <activity android:name=".Admin.usersList"/>
+        <activity android:name=".Admin.usersListAdapter"/>
+        <activity android:name=".Customer.booking"/>
+        <activity android:name=".Customer.customerProfile"/>
+        <activity android:name=".Customer.history"/>
+        <activity android:name=".Customer.payment"/>
+        <activity android:name=".Customer.payment2"/>
+        <activity android:name=".Customer.registerCustomer"/>
+        <activity android:name=".Customer.scheduleCollection"/>
+        <activity android:name=".Customer.status"/>
+        <activity android:name=".Driver.driverProfile"/>
+        <activity android:name=".Driver.pickupDelivery"/>
+        <activity android:name=".Driver.registerDriver"/>
+        <activity android:name=".Driver.registerDriver2"/>
+        <activity android:name=".LandingPage.homepageAdmin"/>
+        <activity android:name=".LandingPage.homepageCustomer"/>
+        <activity android:name=".LandingPage.homepageDriver"/>
+        <activity android:name=".LandingPage.homepageShop"/>
+
+        <activity android:name=".registerOption"/>
+
+       \
+        <activity android:name=".Shop.registerShop"/>
+        <activity android:name=".Shop.registerShop2"/>
+        <activity android:name=".forgotPassword"/>
+
+
+
+
+        <activity android:name=".MainActivity"
+            android:exported="true">
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
+        </activity>
+        <meta-data
+
+            android:resource="@array/preloaded_fonts"
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDtFBQlrblyBT_yLsbBlkrhnGl_kNS2vOY" />
+    </application>
+
+</manifest>
