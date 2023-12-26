@@ -31,7 +31,7 @@ public class history extends AppCompatActivity{
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.order_history);
+            setContentView(R.layout.order_history_customer);
 
             laundryShop = findViewById(R.id.laundryShop);
             pickupDate = findViewById(R.id.pickupDate);
