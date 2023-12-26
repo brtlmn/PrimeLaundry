@@ -50,8 +50,8 @@ public class homepageDriver extends AppCompatActivity {
         });
 
 
-//        accountLogo6 = findViewById(R.id.accountLogo6);
-//        accountLogo6.setOnClickListener(new View.OnClickListener() {
+//        statusLogo5 = findViewById(R.id.statusLogo5);
+//        statusLogo5.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                Intent intent = new Intent(homepageDriver.this, driverProfile.class);

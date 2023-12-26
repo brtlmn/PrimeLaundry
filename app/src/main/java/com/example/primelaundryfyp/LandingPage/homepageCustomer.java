@@ -12,7 +12,7 @@ import com.example.primelaundryfyp.R;
 import com.example.primelaundryfyp.Customer.booking;
 import com.example.primelaundryfyp.Customer.customerProfile;
 import com.example.primelaundryfyp.Customer.history;
-import com.example.primelaundryfyp.Customer.status;
+import com.example.primelaundryfyp.Customer.statusCustomer;
 
 public class homepageCustomer extends AppCompatActivity {
     private ImageView bookingLogo,primeLaundryLogoHome, historyLogo,statusLogo, accountLogo;
@@ -54,7 +54,7 @@ public class homepageCustomer extends AppCompatActivity {
         statusLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(homepageCustomer.this, status.class);
+                Intent intent = new Intent(homepageCustomer.this, statusCustomer.class);
                 startActivity(intent);
             }
         });

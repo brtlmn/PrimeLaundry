@@ -29,7 +29,7 @@
         <activity android:name=".Customer.payment2"/>
         <activity android:name=".Customer.registerCustomer"/>
         <activity android:name=".Customer.scheduleCollection"/>
-        <activity android:name=".Customer.status"/>
+        <activity android:name=".Customer.statusCustomer"/>
         <activity android:name=".Driver.driverProfile"/>
         <activity android:name=".Driver.pickupDelivery"/>
         <activity android:name=".Driver.registerDriver"/>

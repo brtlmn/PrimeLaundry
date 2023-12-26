@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                                    System.out.println(documentSnapshot);
                                     String userType = documentSnapshot.getString("User Type");
                                     if (userType.equals("Customer")) {
                                         setUICustomer();
@@ -125,5 +126,4 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    //belum siap
 }

@@ -91,7 +91,7 @@ public class history extends AppCompatActivity{
             statusLogo5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(history.this, status.class);
+                    Intent intent = new Intent(history.this, statusCustomer.class);
                     startActivity(intent);
                 }
             });
