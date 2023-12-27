@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.TextView;
 
-import com.example.primelaundryfyp.Admin.usersList;
+//import com.example.primelaundryfyp.Admin.usersList;
+import com.example.primelaundryfyp.LandingPage.homepageAdmin;
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
 import com.example.primelaundryfyp.LandingPage.homepageDriver;
 import com.example.primelaundryfyp.LandingPage.homepageShop;
+import com.example.primelaundryfyp.Shop.shopProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -115,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUIShop(){
-        Intent intent = new Intent(MainActivity.this, homepageShop.class);
+        Intent intent = new Intent(MainActivity.this, shopProfile.class);
         startActivity(intent);
         finish();
     }
 
     private void setUIAdmin(){
-        Intent intent = new Intent(MainActivity.this, usersList.class);
+        Intent intent = new Intent(MainActivity.this, homepageAdmin.class);
         startActivity(intent);
         finish();
     }

@@ -38,13 +38,15 @@
         <activity android:name=".LandingPage.homepageCustomer"/>
         <activity android:name=".LandingPage.homepageDriver"/>
         <activity android:name=".LandingPage.homepageShop"/>
-
-        <activity android:name=".registerOption"/>
-
-       \
         <activity android:name=".Shop.registerShop"/>
         <activity android:name=".Shop.registerShop2"/>
+        <activity android:name=".Shop.shopList"/>
+        <activity android:name=".Shop.shopProfile"/>
         <activity android:name=".forgotPassword"/>
+        <activity android:name=".registerOption"/>
+
+
+
 
 
 

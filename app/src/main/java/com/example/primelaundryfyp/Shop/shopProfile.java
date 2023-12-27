@@ -53,12 +53,15 @@ public class shopProfile extends AppCompatActivity {
         shop = firebaseAuth.getCurrentUser(); //semak sini
 
         DocumentReference documentReference = firebasefirestore.collection("Users").document(shop.getUid()); //semak sini
+        System.out.println(documentReference);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+//                System.out.println(documentSnapshot);
                 String userPhoneNum = documentSnapshot.getString("PhoneNumber");
                 String userAddress = documentSnapshot.getString("Address"); //untuk edit text
-                nameCall.setText(documentSnapshot.getString("Name")); //untuk panggil data dari database
+                nameCall.setText("khairil");
+//                nameCall.setText(documentSnapshot.getString("Name")); //untuk panggil data dari database
                 emailCall.setText(shop.getEmail());
                 phoneNumEditTextShop.setText(userPhoneNum);
                 addressEditTextShop.setText(userAddress);
