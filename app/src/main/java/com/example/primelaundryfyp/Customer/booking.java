@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class booking extends AppCompatActivity {
+public class booking extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
     private Button scheduleCollection;
@@ -32,6 +33,7 @@ public class booking extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> booking = new ArrayList<>();
     private String userType = "Shop";
+    private String shopName;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -56,6 +58,7 @@ public class booking extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,userList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         laundryShop.setAdapter(adapter);
+        laundryShop.setOnItemSelectedListener(this);
 
         // Read data from Firebase
         readDataFromFirebase();
@@ -91,9 +94,21 @@ public class booking extends AppCompatActivity {
 
                 Intent intent = new Intent(booking.this, com.example.primelaundryfyp.Customer.scheduleCollection.class);
                 intent.putExtra("booking", booking);
+                intent.putExtra("shopName", shopName);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // Retrieve the selected item using parent.getItemAtPosition(position)
+        shopName = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Handle situation when nothing is selected (if needed)
     }
 
     private void readDataFromFirebase() {

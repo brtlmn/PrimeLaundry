@@ -29,6 +29,7 @@ public class payment extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser user;
+    private String allType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +60,16 @@ public class payment extends AppCompatActivity {
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                typeCall.setText(documentSnapshot.getString("type"));
-                laundryShopCall.setText(documentSnapshot.getString("laundryShop"));
+                ArrayList<String> types = new ArrayList<String>();
+                types.add(documentSnapshot.getString("dryCleaning"));
+                types.add(documentSnapshot.getString("fold"));
+                types.add(documentSnapshot.getString("washDry"));
+                types.add(documentSnapshot.getString("iron"));
+                types.removeIf(String::isEmpty);
+                allType = String.join(", ", types);
+
+                typeCall.setText(allType);
+                laundryShopCall.setText(documentSnapshot.getString("shopName"));
                 pickupDateCall.setText(documentSnapshot.getString("PickupDate"));
                 deliveryDateCall.setText(documentSnapshot.getString("DeliveryDate"));
                 pickupTimeCall.setText(documentSnapshot.getString("PickupTime"));

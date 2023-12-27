@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                                    System.out.println(documentSnapshot);
-                                    String userType = documentSnapshot.getString("User Type");
+                                    String userType = documentSnapshot.getString("UserType");
                                     if (userType.equals("Customer")) {
                                         setUICustomer();
                                     } else if (userType.equals("Driver")) {

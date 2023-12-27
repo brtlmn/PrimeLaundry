@@ -91,6 +91,7 @@ public class scheduleCollection extends AppCompatActivity {
         Intent intent = getIntent();
         user = firebaseAuth.getCurrentUser();
         ArrayList<String> booking = intent.getStringArrayListExtra("booking");
+        String shopName = intent.getStringExtra("shopName");
 
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,15 +100,23 @@ public class scheduleCollection extends AppCompatActivity {
                 DeliveryDate = deliveryDate.getText().toString();
                 PickupTime = pickupTime.getText().toString();
                 DeliveryTime = deliveryTime.getText().toString();
-                booking.add(PickupDate);
-                booking.add(DeliveryDate);
-                booking.add(PickupTime);
-                booking.add(DeliveryTime);
 
-                dryCleaning = booking.get(0);
-                fold = booking.get(1);
-                washDry = booking.get(2);
-                iron = booking.get(3);
+                dryCleaning = "";
+                fold = "";
+                washDry = "";
+                iron = "";
+
+                for (String element: booking) {
+                    if (element.contains("DRY CLEANING")) {
+                        dryCleaning = "DRY CLEANING";
+                    } else if (element.contains("FOLD")) {
+                        fold = "FOLD";
+                    } else if (element.contains("WASH AND DRY")){
+                        washDry = "WASH AND DRY";
+                    } else if (element.contains("IRON")) {
+                        iron = "IRON";
+                    }
+                }
 
                 DocumentReference df = firebasefirestore.collection("Users").document(user.getUid());
                 Map<String, Object> edit = new HashMap<>();
@@ -119,6 +128,7 @@ public class scheduleCollection extends AppCompatActivity {
                 edit.put("DeliveryDate", DeliveryDate);
                 edit.put("PickupTime", PickupTime);
                 edit.put("DeliveryTime", DeliveryTime);
+                edit.put("shopName", shopName);
                 df.update(edit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -134,7 +144,6 @@ public class scheduleCollection extends AppCompatActivity {
 
 
                 Intent intent = new Intent(scheduleCollection.this, com.example.primelaundryfyp.Customer.payment.class);
-                intent.putExtra("booking", booking); //recheck semula sebab confuse??
                 startActivity(intent);
             }
         });
