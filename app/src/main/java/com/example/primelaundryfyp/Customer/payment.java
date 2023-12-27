@@ -74,10 +74,10 @@ public class payment extends AppCompatActivity {
                 deliveryDateCall.setText(documentSnapshot.getString("DeliveryDate"));
                 pickupTimeCall.setText(documentSnapshot.getString("PickupTime"));
                 deliveryTimeCall.setText(documentSnapshot.getString("DeliveryTime"));
-                subtotalCall.setText(documentSnapshot.getString("subTotal"));
-                pickupDeliveryFeeCall.setText(documentSnapshot.getString("pickupDeliveryFee"));
-                taxCall.setText(documentSnapshot.getString("tax"));
-                total.setText(documentSnapshot.getString("total"));
+                subtotalCall.setText(String.valueOf(documentSnapshot.getDouble("subTotal")));
+                pickupDeliveryFeeCall.setText(String.valueOf(documentSnapshot.getDouble("pickupDeliveryFee")));
+                taxCall.setText(String.valueOf(documentSnapshot.getDouble("tax")));
+                total.setText(String.valueOf(documentSnapshot.getDouble("total")));
             }
         });
 

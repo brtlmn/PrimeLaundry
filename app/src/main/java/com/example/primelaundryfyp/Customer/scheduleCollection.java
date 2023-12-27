@@ -38,6 +38,7 @@ public class scheduleCollection extends AppCompatActivity {
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser user;
     private String dryCleaning, fold, washDry, iron, PickupDate, DeliveryDate, PickupTime, DeliveryTime ;
+    private Double subTotal, deliveryFee, serviceTax, total;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -106,17 +107,27 @@ public class scheduleCollection extends AppCompatActivity {
                 washDry = "";
                 iron = "";
 
+                subTotal = 0.0;
+                deliveryFee = 2.0;
+
                 for (String element: booking) {
                     if (element.contains("DRY CLEANING")) {
                         dryCleaning = "DRY CLEANING";
+                        subTotal += 3.5;
                     } else if (element.contains("FOLD")) {
                         fold = "FOLD";
+                        subTotal += 1.5;
                     } else if (element.contains("WASH AND DRY")){
                         washDry = "WASH AND DRY";
+                        subTotal += 2.8;
                     } else if (element.contains("IRON")) {
                         iron = "IRON";
+                        subTotal += 1.8;
                     }
                 }
+                // Service tax 6%
+                serviceTax = subTotal * 0.06;
+                total = subTotal + deliveryFee + serviceTax;
 
                 DocumentReference df = firebasefirestore.collection("Users").document(user.getUid());
                 Map<String, Object> edit = new HashMap<>();
@@ -129,6 +140,10 @@ public class scheduleCollection extends AppCompatActivity {
                 edit.put("PickupTime", PickupTime);
                 edit.put("DeliveryTime", DeliveryTime);
                 edit.put("shopName", shopName);
+                edit.put("subTotal", subTotal);
+                edit.put("pickupDeliveryFee", deliveryFee);
+                edit.put("tax", serviceTax);
+                edit.put("total", total);
                 df.update(edit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
