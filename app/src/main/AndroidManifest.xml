@@ -34,6 +34,7 @@
         <activity android:name=".Driver.pickupDelivery"/>
         <activity android:name=".Driver.registerDriver"/>
         <activity android:name=".Driver.registerDriver2"/>
+        <activity android:name=".Driver.driverList"/>
         <activity android:name=".LandingPage.homepageAdmin"/>
         <activity android:name=".LandingPage.homepageCustomer"/>
         <activity android:name=".LandingPage.homepageDriver"/>
@@ -44,12 +45,6 @@
         <activity android:name=".Shop.shopProfile"/>
         <activity android:name=".forgotPassword"/>
         <activity android:name=".registerOption"/>
-
-
-
-
-
-
 
         <activity android:name=".MainActivity"
             android:exported="true">
