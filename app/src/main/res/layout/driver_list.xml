@@ -5,77 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    setiap listview kena letak dalam xml-->
-
-<!--    <ListView-->
-<!--        android:id="@+id/driverList"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:divider="@android:color/darker_gray"-->
-<!--        android:dividerHeight="1dp"-->
-<!--        android:padding="16dp"-->
-<!--        tools:layout_editor_absoluteX="0dp"-->
-<!--        tools:layout_editor_absoluteY="0dp" />-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="342dp"-->
-<!--        android:layout_height="147dp"-->
-<!--        android:layout_marginStart="34dp"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        android:layout_marginEnd="35dp"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Name" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/email"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Email" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/phoneNum"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Phone Number" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/address"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Address" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/licenseNumber"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="License Number" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/icNum"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="IC Number" />-->
-<!--    </LinearLayout>-->
-
-
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/driverList"
+            android:id="@+id/driverRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

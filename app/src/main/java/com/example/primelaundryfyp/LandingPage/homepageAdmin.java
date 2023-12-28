@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.primelaundryfyp.Customer.customerList;
+import com.example.primelaundryfyp.Driver.driverList;
 import com.example.primelaundryfyp.R;
 import com.example.primelaundryfyp.Shop.shopList;
 
@@ -34,8 +35,8 @@ public class homepageAdmin extends AppCompatActivity {
         driverLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(homepageAdmin.this, driverList.class);
-//                startActivity(intent);
+                Intent intent = new Intent(homepageAdmin.this, driverList.class);
+                startActivity(intent);
             }
         });
 
