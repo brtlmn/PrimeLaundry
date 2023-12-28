@@ -11,42 +11,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.primelaundryfyp.Model.shopModel;
 import com.example.primelaundryfyp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.ArrayList;
 
-public class shopAdapter extends RecyclerView.Adapter<shopAdapter.MyViewHolder>{
+public class shopAdapter extends FirestoreRecyclerAdapter<shopModel,shopAdapter.MyViewHolder>{
+
+    public shopAdapter(@NonNull FirestoreRecyclerOptions<shopModel> options) {
+        super(options);
+    }
 
 
-    Context context;
-    ArrayList<shopModel> list;
-
-    public shopAdapter(Context context, ArrayList<shopModel> list) {
-        this.context = context;
-        this.list = list;
+    @Override
+    protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull shopModel model) {
+        holder.shopItemName.setText(model.getName());
+        holder.shopItemPhoneNum.setText(model.getPhoneNumber());
+        holder.shopItemAddress.setText(model.getAddress());
+        holder.shopItemSsmNumber.setText(model.getSSMNumber());
+        holder.shopItemIcNum.setText(model.getICNum());
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.shop_item,parent, false );
-        return new MyViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-        shopModel shopmodel = list.get(position);
-        holder.shopItemName.setText(shopmodel.getName());
-        holder.shopItemPhoneNum.setText(shopmodel.getPhoneNumber());
-        holder.shopItemAddress.setText(shopmodel.getAddress());
-        holder.shopItemSsmNumber.setText(shopmodel.getSSMNumber());
-        holder.shopItemIcNum.setText(shopmodel.getICNum());
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_item,parent, false);
+        return new  MyViewHolder(view);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
