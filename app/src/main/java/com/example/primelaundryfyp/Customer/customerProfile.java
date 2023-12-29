@@ -38,7 +38,6 @@ public class customerProfile extends AppCompatActivity {
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser user;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

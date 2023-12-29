@@ -69,11 +69,11 @@ public class booking extends AppCompatActivity implements OnMapReadyCallback, Ad
         // Read data from Firebase
         readDataFromFirebase();
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mapView, mapFragment)
-                .commit();
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.mapView, mapFragment)
+//                .commit();
+//        mapFragment.getMapAsync(this);
 
         scheduleCollection.setOnClickListener(new View.OnClickListener() {
             @Override

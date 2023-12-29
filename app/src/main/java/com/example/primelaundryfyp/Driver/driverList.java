@@ -41,7 +41,7 @@ public class driverList extends AppCompatActivity {
 
         FirestoreRecyclerOptions<driverModel> options =
                 new FirestoreRecyclerOptions.Builder<driverModel>()
-                        .setQuery(driverCollection.whereEqualTo("User Type","Driver"), driverModel.class).build();
+                        .setQuery(driverCollection.whereEqualTo("UserType","Driver"), driverModel.class).build();
         driveradapter = new driverAdapter(options);
         recyclerView.setAdapter(driveradapter);
     }

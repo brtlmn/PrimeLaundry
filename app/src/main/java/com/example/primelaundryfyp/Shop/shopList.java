@@ -50,7 +50,7 @@ public class shopList extends AppCompatActivity {
 
         FirestoreRecyclerOptions<shopModel> options =
                 new FirestoreRecyclerOptions.Builder<shopModel>()
-                        .setQuery(shopCollection.whereEqualTo("User Type","Shop"), shopModel.class).build();
+                        .setQuery(shopCollection.whereEqualTo("UserType","Shop"), shopModel.class).build();
         shopadapter = new shopAdapter(options);
         recyclerView.setAdapter(shopadapter);
     }
