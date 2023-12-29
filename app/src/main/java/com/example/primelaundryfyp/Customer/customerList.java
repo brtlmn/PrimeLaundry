@@ -8,8 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.primelaundryfyp.Admin.usersListAdapter;
+//
+//import com.example.primelaundryfyp.Admin.usersListAdapter;
 import com.example.primelaundryfyp.Model.customerModel;
 import com.example.primelaundryfyp.R;
 
@@ -19,14 +19,14 @@ public class customerList extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
-    private usersListAdapter usersListAdapter;
+//    private usersListAdapter usersListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_list);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.customerRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Sample data for demonstration
@@ -40,7 +40,7 @@ public class customerList extends AppCompatActivity {
 //                Toast.makeText(customerList.this, "Clicked on customer: " + customer.getName(), Toast.LENGTH_SHORT).show();
 //            }
 //        });
-        recyclerView.setAdapter(usersListAdapter);
+//        recyclerView.setAdapter(usersListAdapter);
     }
 
     private ArrayList<customerModel> generateSampleData() {

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
 
     <application
@@ -20,8 +22,6 @@
 
 
         <activity android:name=".Admin.registerAdmin"/>
-        <activity android:name=".Admin.usersList"/>
-        <activity android:name=".Admin.usersListAdapter"/>
         <activity android:name=".Customer.booking"/>
         <activity android:name=".Customer.customerProfile"/>
         <activity android:name=".Customer.history"/>
@@ -34,20 +34,17 @@
         <activity android:name=".Driver.pickupDelivery"/>
         <activity android:name=".Driver.registerDriver"/>
         <activity android:name=".Driver.registerDriver2"/>
+        <activity android:name=".Driver.driverList"/>
         <activity android:name=".LandingPage.homepageAdmin"/>
         <activity android:name=".LandingPage.homepageCustomer"/>
         <activity android:name=".LandingPage.homepageDriver"/>
         <activity android:name=".LandingPage.homepageShop"/>
-
-        <activity android:name=".registerOption"/>
-
-       \
         <activity android:name=".Shop.registerShop"/>
         <activity android:name=".Shop.registerShop2"/>
+        <activity android:name=".Shop.shopList"/>
+        <activity android:name=".Shop.shopProfile"/>
         <activity android:name=".forgotPassword"/>
-
-
-
+        <activity android:name=".registerOption"/>
 
         <activity android:name=".MainActivity"
             android:exported="true">
@@ -61,7 +58,10 @@
 
             android:resource="@array/preloaded_fonts"
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDtFBQlrblyBT_yLsbBlkrhnGl_kNS2vOY" />
+            android:value="AIzaSyDb9jHEQLe4aX38ZOr8xeC_I62wnQ9IYig" />
+
+
+
     </application>
 
 </manifest>
