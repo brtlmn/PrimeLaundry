@@ -29,9 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class booking extends AppCompatActivity implements OnMapReadyCallback {
+//public class booking extends AppCompatActivity implements OnMapReadyCallback {
 
-    private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
+public class booking extends AppCompatActivity {
+
+        private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
     private Button scheduleCollection;
     private Spinner laundryShop;
     private GoogleMap mapView;
@@ -67,11 +69,11 @@ public class booking extends AppCompatActivity implements OnMapReadyCallback {
         // Read data from Firebase
         readDataFromFirebase();
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mapView, mapFragment)
-                .commit();
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.mapView, mapFragment)
+//                .commit();
+//        mapFragment.getMapAsync(this);
 
         scheduleCollection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,16 +110,16 @@ public class booking extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
     }
-    public void onMapReady(GoogleMap googleMap) {
-        mapView = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mapView.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney"));
-        mapView.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
+//    public void onMapReady(GoogleMap googleMap) {
+//        mapView = googleMap;
+//
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//        mapView.addMarker(new MarkerOptions()
+//                .position(sydney)
+//                .title("Marker in Sydney"));
+//        mapView.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//    }
 
     private void readDataFromFirebase() {
         CollectionReference usersCollection = firebaseFirestore.collection("Users");

@@ -1,10 +1,10 @@
 package com.example.primelaundryfyp;
+
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import android.view.View;
 import android.widget.EditText;
@@ -12,11 +12,9 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.TextView;
 
-//import com.example.primelaundryfyp.Admin.usersList;
 import com.example.primelaundryfyp.LandingPage.homepageAdmin;
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
 import com.example.primelaundryfyp.LandingPage.homepageDriver;
-import com.example.primelaundryfyp.LandingPage.homepageShop;
 import com.example.primelaundryfyp.Shop.shopProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +27,6 @@ import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private EditText emailLogin, password;
     private TextView linkSignup, linkForgotPassword;
     private Button login;
@@ -50,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         linkSignup = findViewById(R.id.linkSignup);
         linkForgotPassword = findViewById(R.id.linkForgotPassword);
 
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,19 +58,22 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             firebasefirestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                                    System.out.println(documentSnapshot);
-                                    String userType = documentSnapshot.getString("User Type");
-                                    if (userType.equals("Customer")) {
-                                        setUICustomer();
-                                    } else if (userType.equals("Driver")) {
-                                        setUIDriver();
-                                    } else if (userType.equals("Shop")){
-                                        setUIShop();
-                                    } else if (userType.equals("Admin")){
-                                        setUIAdmin();
+                                    String userType = documentSnapshot.getString("UserType");
+                                    if (userType != null) {
+                                        if (userType.equals("Customer")) {
+                                            setUICustomer();
+                                        } else if (userType.equals("Driver")) {
+                                            setUIDriver();
+                                        } else if (userType.equals("Shop")) {
+                                            setUIShop();
+                                        } else if (userType.equals("Admin")) {
+                                            setUIAdmin();
+                                        }
+                                    } else {
+                                        // Handle the case where "UserType" is null
+                                        Toast.makeText(MainActivity.this, "UserType is null", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -86,46 +85,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        linkSignup.setOnClickListener(new View.OnClickListener(){
+        linkSignup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, registerOption.class);
                 startActivity(intent);
             }
         });
 
-
-        linkForgotPassword.setOnClickListener(new View.OnClickListener(){
-
+        linkForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, forgotPassword.class));
             }
         });
     }
 
-    private void setUICustomer(){
+    private void setUICustomer() {
         Intent intent = new Intent(MainActivity.this, homepageCustomer.class);
         startActivity(intent);
         finish();
     }
 
-    private void setUIDriver(){
+    private void setUIDriver() {
         Intent intent = new Intent(MainActivity.this, homepageDriver.class);
         startActivity(intent);
         finish();
     }
 
-    private void setUIShop(){
+    private void setUIShop() {
         Intent intent = new Intent(MainActivity.this, shopProfile.class);
         startActivity(intent);
         finish();
     }
 
-    private void setUIAdmin(){
+    private void setUIAdmin() {
         Intent intent = new Intent(MainActivity.this, homepageAdmin.class);
         startActivity(intent);
         finish();
     }
-
 }
