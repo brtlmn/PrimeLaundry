@@ -1,4 +1,6 @@
 package com.example.primelaundryfyp.Customer;
 
-public class statusCustomer {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class statusCustomer extends AppCompatActivity {
 }
