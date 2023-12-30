@@ -26,7 +26,7 @@
         <activity android:name=".Customer.customerProfile"/>
         <activity android:name=".Customer.history"/>
         <activity android:name=".Customer.payment"/>
-        <activity android:name=".Customer.payment2"/>
+        <activity android:name=".Customer.qrPayment"/>
         <activity android:name=".Customer.registerCustomer"/>
         <activity android:name=".Customer.scheduleCollection"/>
         <activity android:name=".Customer.statusCustomer"/>
