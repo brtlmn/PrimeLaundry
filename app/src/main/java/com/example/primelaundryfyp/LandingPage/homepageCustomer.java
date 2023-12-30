@@ -23,15 +23,6 @@ public class homepageCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage_customer);
 
-        bookingLogo = findViewById(R.id.bookingLogo);
-        bookingLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(homepageCustomer.this, booking.class);
-                startActivity(intent);
-            }
-        });
-
         primeLaundryLogoHome = findViewById(R.id.primeLaundryLogoHome);
         primeLaundryLogoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +32,7 @@ public class homepageCustomer extends AppCompatActivity {
             }
         });
 
+
         historyLogo = findViewById(R.id.historyLogo);
         historyLogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +41,16 @@ public class homepageCustomer extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        bookingLogo = findViewById(R.id.bookingLogo);
+        bookingLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(homepageCustomer.this, booking.class);
+                startActivity(intent);
+            }
+        });
+
 
         statusLogo = findViewById(R.id.statusLogo);
         statusLogo.setOnClickListener(new View.OnClickListener() {
