@@ -152,7 +152,7 @@
             app:layout_constraintTop_toBottomOf="@+id/payment" />
 
         <TextView
-            android:id="@+id/qrPayment"
+            android:id="@+id/payment2"
             android:layout_width="149dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
@@ -217,7 +217,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/foldImg"
-            app:srcCompat="@drawable/qrCode" />
+            app:srcCompat="@drawable/qrcode" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

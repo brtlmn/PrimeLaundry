@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.app.TimePickerDialog;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.LandingPage.homepageCustomer;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,6 +35,7 @@ import java.util.Map;
 public class scheduleCollection extends AppCompatActivity {
 
     private EditText pickupDate, deliveryDate, pickupTime, deliveryTime, bookingLogo;
+   private ImageView  bookingLogo4, primeLaundryLogoHome4, historyLogo4 ,statusLogo4 , accountLogo5;
     private Button payment;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebasefirestore;
@@ -44,6 +47,55 @@ public class scheduleCollection extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_collection);
+
+
+        primeLaundryLogoHome4 = findViewById(R.id.primeLaundryLogoHome4);
+        primeLaundryLogoHome4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(scheduleCollection.this, homepageCustomer.class);
+                startActivity(intent);
+            }
+        });
+
+
+        historyLogo4 = findViewById(R.id.historyLogo4);
+        historyLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(scheduleCollection.this, history.class);
+                startActivity(intent);
+            }
+        });
+
+        bookingLogo4 = findViewById(R.id.bookingLogo4);
+        bookingLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(scheduleCollection.this, booking.class);
+                startActivity(intent);
+            }
+        });
+
+
+        statusLogo4 = findViewById(R.id.statusLogo4);
+        statusLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(scheduleCollection.this, statusCustomer.class);
+                startActivity(intent);
+            }
+        });
+
+        accountLogo5 = findViewById(R.id.accountLogo5);
+        accountLogo5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(scheduleCollection.this, customerProfile.class);
+                startActivity(intent);
+            }
+        });
+
 
         pickupDate = findViewById(R.id.pickupDate);
         pickupDate.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +307,6 @@ public class scheduleCollection extends AppCompatActivity {
 
         deliveryTime.setText(selectedTime);
     }
-
 
 
 }
