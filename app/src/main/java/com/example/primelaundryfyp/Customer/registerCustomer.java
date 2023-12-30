@@ -5,35 +5,27 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.MainActivity;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.HashMap;
-import java.util.Map;
 import com.google.firebase.FirebaseApp;
 
 public class registerCustomer extends AppCompatActivity {
 
     private EditText nameCustReg, emailCustReg, passwordCustReg, phoneNumCustReg, addressCustReg;
     private Button signupCustReg;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore firebasefirestore;
-    private String userId, userType, name, phoneNumber, address;
+    private FirebaseService firebaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_customer);
+
+        firebaseService = new FirebaseService();
 
         nameCustReg = findViewById(R.id.nameCustReg);
         emailCustReg = findViewById(R.id.emailCustReg);
@@ -41,9 +33,7 @@ public class registerCustomer extends AppCompatActivity {
         phoneNumCustReg = findViewById(R.id.phoneNumCustReg);
         addressCustReg = findViewById(R.id.addressCustReg);
         signupCustReg = findViewById(R.id.signupCustReg);
-        firebaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
-        firebasefirestore = firebasefirestore.getInstance();
 
         signupCustReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,30 +44,27 @@ public class registerCustomer extends AppCompatActivity {
                 final String phoneNumber = phoneNumCustReg.getText().toString();
                 final String address = addressCustReg.getText().toString();
 
-                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                User newUser = new User();
+                newUser.setName(name);
+                newUser.setEmail(email);
+                newUser.setPassword(password);
+                newUser.setAddress(address);
+                newUser.setPhone_number(phoneNumber);
+                newUser.setUser_type(newUser.TYPE_CUSTOMER);
+                firebaseService.addUser(newUser, new FirebaseService.FirebaseListener() {
                     @Override
-                    public void onSuccess(AuthResult authResult) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                    public void onSuccess() {
                         Toast.makeText(registerCustomer.this, "Account Registered", Toast.LENGTH_SHORT).show();
-                        DocumentReference df = firebasefirestore.collection("Users").document(user.getUid());
-                        Map<String, Object> userinfo = new HashMap<>();
-                        userinfo.put("Name", nameCustReg.getText().toString());
-                        userinfo.put("PhoneNumber", phoneNumCustReg.getText().toString());
-                        userinfo.put("Address", addressCustReg.getText().toString());
-                        userinfo.put("UserType", "Customer");
-                        df.set(userinfo);
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }
 
-
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFail(Exception e) {
                         Toast.makeText(registerCustomer.this, "Error!"+e, Toast.LENGTH_LONG).show();
                     }
                 });
-                }
-                });
             }
-        }
+        });
+    }
+}
