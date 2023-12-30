@@ -29,9 +29,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-public class booking extends AppCompatActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
+public class booking extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
+        private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
     private Button scheduleCollection;
     private Spinner laundryShop;
     private GoogleMap mapView;
@@ -64,7 +64,6 @@ public class booking extends AppCompatActivity implements OnMapReadyCallback, Ad
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,userList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         laundryShop.setAdapter(adapter);
-        laundryShop.setOnItemSelectedListener(this);
 
         // Read data from Firebase
         readDataFromFirebase();
@@ -111,16 +110,16 @@ public class booking extends AppCompatActivity implements OnMapReadyCallback, Ad
             }
         });
     }
-    public void onMapReady(GoogleMap googleMap) {
-        mapView = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mapView.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney"));
-        mapView.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
+//    public void onMapReady(GoogleMap googleMap) {
+//        mapView = googleMap;
+//
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//        mapView.addMarker(new MarkerOptions()
+//                .position(sydney)
+//                .title("Marker in Sydney"));
+//        mapView.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

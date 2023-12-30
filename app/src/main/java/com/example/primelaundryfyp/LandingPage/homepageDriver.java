@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.primelaundryfyp.Customer.booking;
 import com.example.primelaundryfyp.Driver.driverProfile;
+import com.example.primelaundryfyp.Driver.driverStatus;
 import com.example.primelaundryfyp.Driver.pickupDelivery;
 import com.example.primelaundryfyp.R;
 
@@ -50,14 +51,14 @@ public class homepageDriver extends AppCompatActivity {
         });
 
 
-//        statusLogo5 = findViewById(R.id.statusLogo5);
-//        statusLogo5.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(homepageDriver.this, driverProfile.class);
-//                startActivity(intent);
-//            }
-//        });  TAKDE TAU STATUS NK BUAT MACAM MANA
+        statusLogo5 = findViewById(R.id.statusLogo5);
+        statusLogo5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(homepageDriver.this, driverStatus.class);
+                startActivity(intent);
+            }
+        });
 
         accountLogo6 = findViewById(R.id.accountLogo6);
         accountLogo6.setOnClickListener(new View.OnClickListener() {
