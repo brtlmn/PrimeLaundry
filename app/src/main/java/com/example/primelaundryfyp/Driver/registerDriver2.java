@@ -7,30 +7,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.MainActivity;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class registerDriver2 extends AppCompatActivity {
 
     private EditText addressDriverReg, icNum;
     private Button signupDriverReg;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore firebasefirestore;
+    private FirebaseService firebaseService;
     private String email, password, name, phoneNumber, address, icNumber, LicenseNumber;
 
     @Override
@@ -38,12 +28,11 @@ public class registerDriver2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_driver2);
 
+        firebaseService = new FirebaseService();
         addressDriverReg = findViewById(R.id.addressDriverReg);
         icNum = findViewById(R.id.icNum);
         signupDriverReg = findViewById(R.id.signupDriverReg);
-        firebaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
-        firebasefirestore = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
         ArrayList<String> driverReg = intent.getStringArrayListExtra("driverReg");
 
@@ -64,31 +53,26 @@ public class registerDriver2 extends AppCompatActivity {
                 LicenseNumber = driverReg.get(5);
 
 
-                firebaseAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        Toast.makeText(registerDriver2.this, "Account Registered", Toast.LENGTH_SHORT).show();
-                        DocumentReference df = firebasefirestore.collection("Users").document(user.getUid());
-                        Map<String, Object> userinfo = new HashMap<>();
-                        userinfo.put("Name", name);
-                        userinfo.put("PhoneNumber", phoneNumber);
-                        userinfo.put("Address", addressDriverReg.getText().toString());
-                        userinfo.put("ICNum", icNum.getText().toString());
-                        userinfo.put("LicenseNumber", LicenseNumber);
-                        userinfo.put("User Type", "Driver");
-                        df.set(userinfo);
+                User userModel = new User();
+                userModel.setName(name);
+                userModel.setEmail(email);
+                userModel.setPassword(password);
+                userModel.setAddress(address);
+                userModel.setPhone_number(phoneNumber);
+                userModel.setUser_type(userModel.TYPE_DRIVER);
 
+                firebaseService.addUser(userModel, new FirebaseService.FirebaseListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(registerDriver2.this, "Account Registered", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
-                        //Toast.makeText(registerDriver2.this, "Error!"+e, Toast.LENGTH_LONG).show();
-
-                    }  }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(registerDriver2.this, "Error!"+e, Toast.LENGTH_LONG).show();
                     }
 
+                    @Override
+                    public void onFail(Exception e) {
+                        Toast.makeText(registerDriver2.this, "Error!"+e, Toast.LENGTH_LONG).show();
+                    }
                 });
              }
         });
