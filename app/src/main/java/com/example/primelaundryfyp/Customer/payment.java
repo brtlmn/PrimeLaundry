@@ -75,7 +75,7 @@ public class payment extends AppCompatActivity {
         proceedPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(payment.this, payment2.class);
+                Intent intent = new Intent(payment.this, qrPayment.class);
                 intent.putExtra("booking", booking); //recheck semula sebab confuse??
                 startActivity(intent);
                 proceedPayment();

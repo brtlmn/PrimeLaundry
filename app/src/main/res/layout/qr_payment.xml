@@ -158,7 +158,7 @@
             android:layout_marginStart="11dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="144dp"
-            android:text="DR PAYMENT"
+            android:text="QR PAYMENT"
             android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/foldImg"
@@ -199,13 +199,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginBottom="84dp"
             android:text="UPLOAD RECEIPT"
-            app:layout_constraintBottom_toTopOf="@+id/statusLogo5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/qrCodeImageView" />
+
+        <ImageView
+            android:id="@+id/qrCodeImageView"
+            android:layout_width="223dp"
+            android:layout_height="336dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/foldImg"
+            app:srcCompat="@drawable/qrCode" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
