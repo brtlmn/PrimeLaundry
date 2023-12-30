@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class booking extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-        private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
+    private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
     private Button scheduleCollection;
     private Spinner laundryShop;
     private GoogleMap mapView;
