@@ -4,16 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.FirebaseService;
+import com.example.primelaundryfyp.Model.User;
+import com.example.primelaundryfyp.Model.customerModel;
 import com.example.primelaundryfyp.Driver.driverProfile;
 import com.example.primelaundryfyp.Driver.driverStatus;
 import com.example.primelaundryfyp.Driver.pickupDelivery;
@@ -34,7 +41,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class booking extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
@@ -68,12 +74,20 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
         laundryShop = findViewById(R.id.laundryShop);
 
         userList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, userList);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,userList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         laundryShop.setAdapter(adapter);
 
+        laundryShop.setOnItemSelectedListener(this);
+
         // Read data from Firebase
         readDataFromFirebase();
+
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.mapView, mapFragment)
+//                .commit();
+//        mapFragment.getMapAsync(this);
 
         scheduleCollection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,13 +188,13 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
     private void readDataFromFirebase() {
         CollectionReference usersCollection = firebaseFirestore.collection("Users");
 
-        usersCollection.whereEqualTo("User Type", userType)
+        usersCollection.whereEqualTo("user_type", new User().TYPE_SHOP)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         userList.clear();
                         for (DocumentSnapshot document : task.getResult()) {
-                            shopModel user = document.toObject(shopModel.class);
+                            User user = document.toObject(User.class);
                             if (user != null) {
                                 String userName = user.getName();
                                 userList.add(userName);

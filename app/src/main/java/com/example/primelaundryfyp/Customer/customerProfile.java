@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,13 +39,14 @@ public class customerProfile extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser user;
+    private FirebaseService firebaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_profile);
 
-
+        firebaseService = new FirebaseService();
         name = findViewById(R.id.name);
         emailCall = findViewById(R.id.emailCall);
         phoneNumEditText = findViewById(R.id.phoneNumEditText);
@@ -55,25 +58,25 @@ public class customerProfile extends AppCompatActivity {
         firebasefirestore = FirebaseFirestore.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-
-
-        //Retrieve the data from database and set to this page
-        DocumentReference documentReference = firebasefirestore.collection("Users").document(user.getUid());
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        firebaseService.getUser(user.getUid(), new FirebaseService.RetrievalListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                String userPhoneNum = documentSnapshot.getString("PhoneNumber");
-                String userAddress = documentSnapshot.getString("Address");
-                String userType = documentSnapshot.getString("User Type");
-                name.setText(documentSnapshot.getString("Name"));
+            public void onRetrieved(DocumentSnapshot model) {
+                name.setText(model.getString("name"));
                 emailCall.setText(user.getEmail());
-                phoneNumEditText.setText(userPhoneNum);
-                addressEditText.setText(userAddress);
-                customerProfile.setText(userType);
+                phoneNumEditText.setText(model.getString("phone_number"));
+                addressEditText.setText(model.getString("address"));
+                customerProfile.setText(model.getString("user_type"));
             }
 
+            @Override
+            public void onNotFound() {
 
+            }
 
+            @Override
+            public void onFailRetrieval(Exception e) {
+
+            }
         });
 
         saveEditProfileCust.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +87,8 @@ public class customerProfile extends AppCompatActivity {
 
                 DocumentReference df = firebasefirestore.collection("Users").document(user.getUid());
                 Map<String, Object> edit = new HashMap<>();
-                edit.put("PhoneNumber", pNum);
-                edit.put("Address", address);
+                edit.put("phone_number", pNum);
+                edit.put("address", address);
                 df.update(edit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

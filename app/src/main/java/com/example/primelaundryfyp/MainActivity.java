@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.primelaundryfyp.LandingPage.homepageAdmin;
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
 import com.example.primelaundryfyp.LandingPage.homepageDriver;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.Shop.shopProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.FirebaseApp;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,15 +62,15 @@ public class MainActivity extends AppCompatActivity {
                             firebasefirestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    String userType = documentSnapshot.getString("UserType");
+                                    String userType = documentSnapshot.getString("user_type");
                                     if (userType != null) {
-                                        if (userType.equals("Customer")) {
+                                        if (userType.equals(new User().TYPE_CUSTOMER)) {
                                             setUICustomer();
-                                        } else if (userType.equals("Driver")) {
+                                        } else if (userType.equals(new User().TYPE_DRIVER)) {
                                             setUIDriver();
-                                        } else if (userType.equals("Shop")) {
+                                        } else if (userType.equals(new User().TYPE_SHOP)) {
                                             setUIShop();
-                                        } else if (userType.equals("Admin")) {
+                                        } else if (userType.equals(new User().TYPE_ADMIN)) {
                                             setUIAdmin();
                                         }
                                     } else {

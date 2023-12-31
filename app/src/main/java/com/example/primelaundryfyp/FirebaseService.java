@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.primelaundryfyp.Customer.registerCustomer;
+import com.example.primelaundryfyp.Model.Booking;
 import com.example.primelaundryfyp.Model.Shop;
 import com.example.primelaundryfyp.Model.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -15,22 +17,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.core.FirestoreClient;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FirebaseService {
-    public interface UsersCallback {
-        void onUsersLoaded(HashMap<String, User> usersMap);
-        void onUsersLoadFailure(Exception e);
-    }
-
     public interface FirebaseListener {
         void onSuccess();
         void onFail(Exception e);
+    }
+
+    public interface RetrievalListener<T> {
+        void onRetrieved(T model);
+        void onNotFound();
+        void onFailRetrieval(Exception e);
+
     }
 
     private FirebaseFirestore firestore;
@@ -41,22 +50,43 @@ public class FirebaseService {
         this.firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public void getAllUsers(String collectionName, UsersCallback callback) {
-        CollectionReference usersCollection = firestore.collection(collectionName);
-        HashMap<String, User> usersMap = new HashMap<>();
+    public void getCustomers(RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Users");
 
-        usersCollection.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    String userId = document.getId();
-                    User user = document.toObject(User.class);
-                    usersMap.put(userId, user);
-                }
-                callback.onUsersLoaded(usersMap);
-            } else {
-                callback.onUsersLoadFailure(task.getException());
-            }
-        });
+        collectionReference.whereEqualTo("user_type", new User().TYPE_CUSTOMER)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getDrivers(RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Users");
+
+        collectionReference.whereEqualTo("user_type", new User().TYPE_DRIVER)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getShops(RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Users");
+
+        collectionReference.whereEqualTo("user_type", new User().TYPE_SHOP)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
     }
 
     public void addUser(User user, FirebaseListener listener) {
@@ -119,4 +149,89 @@ public class FirebaseService {
             }
         });
     }
+
+    public void addBooking(Booking bookingModel, FirebaseListener listener) {
+        DocumentReference bookingsCollection = firestore.collection("Bookings").document(bookingModel.getId());
+        bookingsCollection.set(bookingModel)
+                .addOnSuccessListener(aVoid -> {
+                    listener.onSuccess();
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFail(e);
+                });
+    }
+
+    public void getBookings(RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("user_type", new User().TYPE_SHOP)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getBookingsByCustomer(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("customer_id", customer_id)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getBookingById(String id, RetrievalListener<DocumentSnapshot> listener) {
+        DocumentReference bookingRef = firestore.collection("Bookings").document(id);
+
+        bookingRef.get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        listener.onRetrieved(documentSnapshot);
+                    } else {
+                        listener.onNotFound();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getShopByName(String name, RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Users");
+
+        collectionReference.whereEqualTo("user_type", new User().TYPE_SHOP)
+                .whereEqualTo("name", name)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getUser(String id, RetrievalListener<DocumentSnapshot> listener) {
+        DocumentReference bookingRef = firestore.collection("Users").document(id);
+
+        bookingRef.get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        listener.onRetrieved(documentSnapshot);
+                    } else {
+                        listener.onNotFound();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+
 }

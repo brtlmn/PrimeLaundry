@@ -8,19 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.FirebaseService;
+import com.example.primelaundryfyp.Model.Booking;
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
 import com.example.primelaundryfyp.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
@@ -30,15 +26,15 @@ public class payment extends AppCompatActivity {
     private ImageView primeLaundryLogoHome5, historyLogo5,bookingLogo5, statusLogo5, accountLogo6;
     private Button proceedPayment;
     private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore firebasefirestore;
-    private FirebaseUser user;
     private String allType;
+    private FirebaseService firebaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payment);
 
+        firebaseService = new FirebaseService();
         typeCall = findViewById(R.id.typeCall);
         laundryShopCall = findViewById(R.id.laundryShopCall);
         pickupDateCall = findViewById(R.id.pickupDateCall);
@@ -53,34 +49,42 @@ public class payment extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
-        firebasefirestore = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
-        user = firebaseAuth.getCurrentUser();
-        ArrayList<String> booking = intent.getStringArrayListExtra("booking");
+        String bookingId = intent.getStringExtra("bookingId");
 
-
-        DocumentReference documentReference = firebasefirestore.collection("Users").document(user.getUid());
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        firebaseService.getBookingById(bookingId, new FirebaseService.RetrievalListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+            public void onRetrieved(DocumentSnapshot model) {
+                Booking booking = model.toObject(Booking.class);
+
                 ArrayList<String> types = new ArrayList<String>();
-                types.add(documentSnapshot.getString("dryCleaning"));
-                types.add(documentSnapshot.getString("fold"));
-                types.add(documentSnapshot.getString("washDry"));
-                types.add(documentSnapshot.getString("iron"));
+                types.add(booking.getIs_DryCleaning());
+                types.add(booking.getIs_fold());
+                types.add(booking.getIs_washDry());
+                types.add(booking.getIs_iron());
                 types.removeIf(String::isEmpty);
                 allType = String.join(", ", types);
 
                 typeCall.setText(allType);
-                laundryShopCall.setText(documentSnapshot.getString("shopName"));
-                pickupDateCall.setText(documentSnapshot.getString("PickupDate"));
-                deliveryDateCall.setText(documentSnapshot.getString("DeliveryDate"));
-                pickupTimeCall.setText(documentSnapshot.getString("PickupTime"));
-                deliveryTimeCall.setText(documentSnapshot.getString("DeliveryTime"));
-                subtotalCall.setText(String.valueOf(documentSnapshot.getDouble("subTotal")));
-                pickupDeliveryFeeCall.setText(String.valueOf(documentSnapshot.getDouble("pickupDeliveryFee")));
-                taxCall.setText(String.valueOf(documentSnapshot.getDouble("tax")));
-                total.setText(String.valueOf(documentSnapshot.getDouble("total")));
+                laundryShopCall.setText(booking.getShop_name());
+                pickupDateCall.setText(booking.getPickup_date());
+                deliveryDateCall.setText(booking.getDelivery_date());
+                pickupTimeCall.setText(booking.getPickup_time());
+                deliveryTimeCall.setText(booking.getDelivery_time());
+                subtotalCall.setText(booking.getSub_total());
+                pickupDeliveryFeeCall.setText(booking.getDelivery_fee());
+                taxCall.setText(booking.getTax());
+                total.setText(booking.getTotal());
+            }
+
+            @Override
+            public void onNotFound() {
+                Toast.makeText(payment.this, "Booking not found", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailRetrieval(Exception e) {
+                Toast.makeText(payment.this, "Failed to get booking", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -136,7 +140,6 @@ public class payment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(payment.this, qrPayment.class);
-                intent.putExtra("booking", booking); //recheck semula sebab confuse??
                 startActivity(intent);
                 proceedPayment();
             }

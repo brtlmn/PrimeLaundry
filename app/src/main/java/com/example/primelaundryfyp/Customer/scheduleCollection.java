@@ -16,21 +16,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
+import com.example.primelaundryfyp.Constant;
+import com.example.primelaundryfyp.FirebaseService;
+import com.example.primelaundryfyp.Model.Booking;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 public class scheduleCollection extends AppCompatActivity {
 
@@ -41,6 +49,10 @@ public class scheduleCollection extends AppCompatActivity {
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser user;
     private String dryCleaning, fold, washDry, iron, PickupDate, DeliveryDate, PickupTime, DeliveryTime ;
+    private Double subTotal, deliveryFee, serviceTax, total;
+    private String shopId, bookingId;
+
+    private FirebaseService firebaseService;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -48,6 +60,7 @@ public class scheduleCollection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_collection);
 
+        firebaseService = new FirebaseService();
 
         primeLaundryLogoHome4 = findViewById(R.id.primeLaundryLogoHome4);
         primeLaundryLogoHome4.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +156,22 @@ public class scheduleCollection extends AppCompatActivity {
         Intent intent = getIntent();
         user = firebaseAuth.getCurrentUser();
         ArrayList<String> booking = intent.getStringArrayListExtra("booking");
+        String shopName = intent.getStringExtra("shopName");
+
+        firebaseService.getShopByName(shopName, new FirebaseService.RetrievalListener<List<DocumentSnapshot>>() {
+            @Override
+            public void onRetrieved(List<DocumentSnapshot> model) {
+                shopId = model.get(0).getId();
+            }
+            @Override
+            public void onNotFound() {
+                Toast.makeText(scheduleCollection.this, "Shop not found", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailRetrieval(Exception e) {
+                Toast.makeText(scheduleCollection.this, "Shop not found", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,42 +180,70 @@ public class scheduleCollection extends AppCompatActivity {
                 DeliveryDate = deliveryDate.getText().toString();
                 PickupTime = pickupTime.getText().toString();
                 DeliveryTime = deliveryTime.getText().toString();
-                booking.add(PickupDate);
-                booking.add(DeliveryDate);
-                booking.add(PickupTime);
-                booking.add(DeliveryTime);
 
-                dryCleaning = booking.get(0);
-                fold = booking.get(1);
-                washDry = booking.get(2);
-                iron = booking.get(3);
+                dryCleaning = "";
+                fold = "";
+                washDry = "";
+                iron = "";
 
-                DocumentReference df = firebasefirestore.collection("Users").document(user.getUid());
-                Map<String, Object> edit = new HashMap<>();
-                edit.put("dryCleaning", dryCleaning);
-                edit.put("fold", fold);
-                edit.put("washDry", washDry);
-                edit.put("iron", iron);
-                edit.put("PickupDate", PickupDate);
-                edit.put("DeliveryDate", DeliveryDate);
-                edit.put("PickupTime", PickupTime);
-                edit.put("DeliveryTime", DeliveryTime);
-                df.update(edit).addOnSuccessListener(new OnSuccessListener<Void>() {
+                deliveryFee = 2.0;
+                subTotal = 0.0;
+                for (String type: booking){
+                    if (type.equals("DRY CLEANING")){
+                        dryCleaning = "Dry Cleaning";
+                        subTotal += 3.8;
+                    }
+                    if (type.equals("FOLD")){
+                        fold = "fold";
+                        subTotal += 1.5;
+                    }
+                    if (type.equals("WASH AND DRY")){
+                        washDry = "Wash and Dry";
+                        subTotal += 3.5;
+                    }
+                    if (type.equals("IRON")){
+                        iron = "iron";
+                        subTotal += 1.8;
+                    }
+                }
+
+                serviceTax = subTotal * 0.06;
+                total = serviceTax + subTotal + deliveryFee;
+
+                bookingId = UUID.randomUUID().toString();
+                Booking booking = new Booking();
+                booking.setId(bookingId);
+                booking.setCustomer_id(user.getUid());
+                booking.setDriver_id(null);
+                booking.setShop_id(shopId);
+                booking.setTotal(String.format("%.2f", total));
+                booking.setIs_DryCleaning(dryCleaning);
+                booking.setIs_fold(fold);
+                booking.setIs_washDry(washDry);
+                booking.setIs_iron(iron);
+                booking.setPickup_date(PickupDate);
+                booking.setDelivery_date(DeliveryDate);
+                booking.setPickup_time(PickupTime);
+                booking.setDelivery_time(DeliveryTime);
+                booking.setShop_name(shopName);
+                booking.setSub_total(String.format("%.2f", subTotal));
+                booking.setDelivery_fee(String.format("%.2f", deliveryFee));
+                booking.setTax(String.format("%.2f", serviceTax));
+                booking.setStatus(new Constant().STATUS_PENDING);
+                firebaseService.addBooking(booking, new FirebaseService.FirebaseListener() {
                     @Override
-                    public void onSuccess(Void unused) {
+                    public void onSuccess() {
                         Toast.makeText(scheduleCollection.this, "Booking Successful", Toast.LENGTH_SHORT).show();
                     }
 
-                }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFail(Exception e) {
                         Toast.makeText(scheduleCollection.this, "Booking unsuccessful", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-
                 Intent intent = new Intent(scheduleCollection.this, com.example.primelaundryfyp.Customer.payment.class);
-                intent.putExtra("booking", booking); //recheck semula sebab confuse??
+                intent.putExtra("bookingId", bookingId);
                 startActivity(intent);
             }
         });
@@ -307,6 +364,7 @@ public class scheduleCollection extends AppCompatActivity {
 
         deliveryTime.setText(selectedTime);
     }
+
 
 
 }
