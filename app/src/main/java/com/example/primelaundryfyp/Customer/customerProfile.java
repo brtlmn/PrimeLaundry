@@ -33,7 +33,7 @@ public class customerProfile extends AppCompatActivity {
     private TextView name, emailCall, customerProfile;
     private Button saveEditProfileCust;
     private EditText phoneNumEditText, addressEditText;
-    private ImageView primeLaundryLogoHome4, bookingLogo4;
+    private ImageView primeLaundryLogoHome4,historyLogo4, bookingLogo4, statusLogo4, accountLogo5;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser user;
@@ -110,6 +110,16 @@ public class customerProfile extends AppCompatActivity {
             }
         });
 
+
+        historyLogo4 = findViewById(R.id.historyLogo4);
+        historyLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(customerProfile.this, history.class);
+                startActivity(intent);
+            }
+        });
+
         bookingLogo4 = findViewById(R.id.bookingLogo4);
         bookingLogo4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +128,36 @@ public class customerProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        bookingLogo4 = findViewById(R.id.bookingLogo4);
+        bookingLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(customerProfile.this, booking.class);
+                startActivity(intent);
+            }
+        });
+
+
+        statusLogo4 = findViewById(R.id.statusLogo4);
+        statusLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(customerProfile.this, statusCustomer.class);
+                startActivity(intent);
+            }
+        });
+
+        accountLogo5 = findViewById(R.id.accountLogo5);
+        accountLogo5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(customerProfile.this, customerProfile.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

@@ -8,11 +8,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.Driver.driverProfile;
+import com.example.primelaundryfyp.Driver.driverStatus;
+import com.example.primelaundryfyp.Driver.pickupDelivery;
+import com.example.primelaundryfyp.LandingPage.homepageDriver;
 import com.example.primelaundryfyp.Model.shopModel;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,9 +34,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class booking extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-        private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
+    private CheckBox dryCleaningCheckBox, foldCheckBox, washDryCheckBox, ironCheckBox;
+    private ImageView primeLaundryLogoHome4, historyLogo4, bookingLogo4, statusLogo4, accountLogo5;
     private Button scheduleCollection;
     private Spinner laundryShop;
     private GoogleMap mapView;
@@ -61,18 +68,12 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
         laundryShop = findViewById(R.id.laundryShop);
 
         userList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,userList);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, userList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         laundryShop.setAdapter(adapter);
 
         // Read data from Firebase
         readDataFromFirebase();
-
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.mapView, mapFragment)
-//                .commit();
-//        mapFragment.getMapAsync(this);
 
         scheduleCollection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,17 +110,55 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
                 startActivity(intent);
             }
         });
+
+        // Initialize logos
+        primeLaundryLogoHome4 = findViewById(R.id.primeLaundryLogoHome4);
+        historyLogo4 = findViewById(R.id.historyLogo4);
+        bookingLogo4 = findViewById(R.id.bookingLogo4);
+        statusLogo4 = findViewById(R.id.statusLogo4);
+        accountLogo5 = findViewById(R.id.accountLogo5);
+
+        // Set click listeners for logos
+        primeLaundryLogoHome4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(booking.this, homepageDriver.class);
+                startActivity(intent);
+            }
+        });
+
+        historyLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(booking.this, homepageDriver.class);
+                startActivity(intent);
+            }
+        });
+
+        bookingLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(booking.this, pickupDelivery.class);
+                startActivity(intent);
+            }
+        });
+
+        statusLogo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(booking.this, driverStatus.class);
+                startActivity(intent);
+            }
+        });
+
+        accountLogo5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(booking.this, driverProfile.class);
+                startActivity(intent);
+            }
+        });
     }
-//    public void onMapReady(GoogleMap googleMap) {
-//        mapView = googleMap;
-//
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mapView.addMarker(new MarkerOptions()
-//                .position(sydney)
-//                .title("Marker in Sydney"));
-//        mapView.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -151,7 +190,7 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
                     } else {
                         // Handle the error if needed
                         // For example, you can log the error
-                         Log.e("Firestore Error", "Error getting documents: ", task.getException());
+                        Log.e("Firestore Error", "Error getting documents: ", task.getException());
                     }
                 });
     }

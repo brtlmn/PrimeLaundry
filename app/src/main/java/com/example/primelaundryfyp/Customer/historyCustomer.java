@@ -1,4 +1,6 @@
 package com.example.primelaundryfyp.Customer;
 
-public class historyCustomer {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class historyCustomer extends AppCompatActivity {
 }
