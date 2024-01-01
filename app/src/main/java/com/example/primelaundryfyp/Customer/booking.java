@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.primelaundryfyp.Constant;
 import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.Driver.driverProfile;
-import com.example.primelaundryfyp.Driver.driverStatus;
 import com.example.primelaundryfyp.LandingPage.homepageDriver;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -139,7 +138,7 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
         bookingLogo4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(booking.this, pickupDelivery.class);
+                Intent intent = new Intent(booking.this, booking.class);
                 startActivity(intent);
             }
         });
@@ -147,7 +146,7 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
         statusLogo4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(booking.this, driverStatus.class);
+                Intent intent = new Intent(booking.this, statusCustomer.class);
                 startActivity(intent);
             }
         });

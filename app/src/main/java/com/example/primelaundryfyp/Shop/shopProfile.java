@@ -1,9 +1,11 @@
 package com.example.primelaundryfyp.Shop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.LandingPage.homepageShop;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +32,8 @@ import java.util.Map;
 public class shopProfile extends AppCompatActivity {
 
     private TextView nameCall, emailCall, ssmNumCall, icNumCall;
+
+    private ImageView primeLaundryLogoHome11, historyLogo11, bookingLogo11, accountLogo12;
     private Button saveEditProfileShop;
     private EditText phoneNumEditTextShop, addressEditTextShop;
     private FirebaseAuth firebaseAuth;
@@ -92,6 +97,44 @@ public class shopProfile extends AppCompatActivity {
                         Toast.makeText(shopProfile.this, "Save unsuccessful", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+
+        primeLaundryLogoHome11 = findViewById(R.id.primeLaundryLogoHome11);
+        primeLaundryLogoHome11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(shopProfile.this, homepageShop.class);
+                startActivity(intent);
+            }
+        });
+
+        historyLogo11 = findViewById(R.id.historyLogo11);
+        historyLogo11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(shopProfile.this, shopHistory.class);
+                startActivity(intent);
+            }
+        });
+
+        bookingLogo11 = findViewById(R.id.bookingLogo11);
+        bookingLogo11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(shopProfile.this, shopCurrentJob.class);
+                startActivity(intent);
+            }
+        });
+
+
+        accountLogo12 = findViewById(R.id.accountLogo12);
+        accountLogo12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(shopProfile.this, shopProfile.class);
+                startActivity(intent);
             }
         });
     }
