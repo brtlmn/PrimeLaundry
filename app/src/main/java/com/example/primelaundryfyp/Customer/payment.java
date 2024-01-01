@@ -147,6 +147,6 @@ public class payment extends AppCompatActivity {
     }
 
     private void proceedPayment() {
-        Toast.makeText(this, "PROCEED PAYMENT button clicked!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "PROCEED PAYMENT button clicked!", Toast.LENGTH_SHORT).show();
     }
 }
