@@ -34,7 +34,7 @@ public class qrPayment extends AppCompatActivity {
 
     private ImageView bookingLogo5 ,primeLaundryLogoHome5, historyLogo5,statusLogo5, accountLogo6;
     private Button uploadReceipt;
-    private String userId;
+    private String userId, bookingId;
     StorageReference storageReference;
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
@@ -52,6 +52,8 @@ public class qrPayment extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         user = firebaseAuth.getCurrentUser();
         userId = user.getUid();
+        Intent intent = getIntent();
+        bookingId = intent.getStringExtra("bookingId");
 
         uploadReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +141,7 @@ public class qrPayment extends AppCompatActivity {
                         while (!uriTask.isComplete());
                         Uri url = uriTask.getResult();
 
-                        Receipt receipt = new Receipt(UUID.randomUUID().toString(), userId, url.toString());
+                        Receipt receipt = new Receipt(UUID.randomUUID().toString(), userId, url.toString(), bookingId);
                         DocumentReference receiptsRef = firestore.collection("Receipts").document(receipt.getId());
                         receiptsRef.set(receipt);
 

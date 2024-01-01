@@ -140,6 +140,7 @@ public class payment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(payment.this, qrPayment.class);
+                intent.putExtra("bookingId", bookingId);
                 startActivity(intent);
                 proceedPayment();
             }
