@@ -5,17 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.primelaundryfyp.LandingPage.homepageShop;
 import com.example.primelaundryfyp.R;
 
 public class shopHistory extends AppCompatActivity {
 
         private ImageView primeLaundryLogoHome10, historyLogo10, bookingLogo10, accountLogo11;
-        private Button doneShop;
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
