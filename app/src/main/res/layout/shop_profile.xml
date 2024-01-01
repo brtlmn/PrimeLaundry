@@ -5,6 +5,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/historyLogo11"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/history"
+        app:layout_constraintEnd_toStartOf="@+id/bookingLogo11"
+        app:layout_constraintStart_toEndOf="@+id/primeLaundryLogoHome11"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/bookingLogo11"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/booking"
+        app:layout_constraintEnd_toStartOf="@+id/accountLogo12"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/primeLaundryLogoHome11"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="644dp"
+        android:background="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/account11"
+        android:layout_width="52dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="48dp"
+        android:text="Account"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountLogo12" />
+
+    <ImageView
+        android:id="@+id/accountLogo12"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/job7"
+        android:layout_width="29dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="148dp"
+        android:text="Job"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookingLogo11" />
+
+    <TextView
+        android:id="@+id/home11"
+        android:layout_width="42dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="4dp"
+        android:text="Home"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/primeLaundryLogoHome11" />
+
+    <TextView
+        android:id="@+id/history11"
+        android:layout_width="45dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="212dp"
+        android:text="History"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyLogo11" />
+
     <Button
         android:id="@+id/saveEditProfileShop"
         android:layout_width="wrap_content"
@@ -14,61 +104,6 @@
         android:text="SAVE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressEditTextShop" />
-
-    <TextView
-        android:id="@+id/history4"
-        android:layout_width="45dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="264dp"
-        android:text="History"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyLogo4" />
-
-    <TextView
-        android:id="@+id/home4"
-        android:layout_width="42dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
-        android:text="Home"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/primeLaundryLogoHome4" />
-
-    <TextView
-        android:id="@+id/status4"
-        android:layout_width="47dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="100dp"
-        android:text="Status"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusLogo4" />
-
-    <TextView
-        android:id="@+id/account4"
-        android:layout_width="52dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="28dp"
-        android:text="Account"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountLogo5" />
-
-    <TextView
-        android:id="@+id/booking4"
-        android:layout_width="52dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="180dp"
-        android:text="Booking"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookingLogo4" />
 
     <TextView
         android:id="@+id/textAppsName3"
@@ -109,67 +144,6 @@
         android:background="@drawable/account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accountCustomer" />
-
-    <ImageView
-        android:id="@+id/historyLogo4"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="644dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/history"
-        app:layout_constraintEnd_toStartOf="@+id/bookingLogo4"
-        app:layout_constraintStart_toEndOf="@+id/primeLaundryLogoHome4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/accountLogo5"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="644dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/account"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/statusLogo4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/statusLogo4"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="644dp"
-        android:background="@drawable/status"
-        app:layout_constraintStart_toEndOf="@+id/bookingLogo4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/primeLaundryLogoHome4"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="644dp"
-        android:background="@drawable/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/bookingLogo4"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="644dp"
-        android:layout_marginEnd="148dp"
-        android:background="@drawable/booking"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nameCall"

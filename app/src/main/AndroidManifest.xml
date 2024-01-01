@@ -33,10 +33,12 @@
         <activity android:name=".Customer.customerList"/>
         <activity android:name=".Customer.viewStatusCustomer"/>
         <activity android:name=".Driver.driverProfile"/>
-        <activity android:name=".Driver.pickupDelivery"/>
         <activity android:name=".Driver.registerDriver"/>
         <activity android:name=".Driver.registerDriver2"/>
         <activity android:name=".Driver.driverList"/>
+        <activity android:name=".Driver.driverJobHistory"/>
+        <activity android:name=".Driver.driverJobInfo"/>
+        <activity android:name=".Driver.driverCurrentJob"/>
         <activity android:name=".LandingPage.homepageAdmin"/>
         <activity android:name=".LandingPage.homepageCustomer"/>
         <activity android:name=".LandingPage.homepageDriver"/>
@@ -45,6 +47,9 @@
         <activity android:name=".Shop.registerShop2"/>
         <activity android:name=".Shop.shopList"/>
         <activity android:name=".Shop.shopProfile"/>
+        <activity android:name=".Shop.shopHistory"/>
+        <activity android:name=".Shop.shopJobInfo"/>
+        <activity android:name=".Shop.shopCurrentJob"/>
         <activity android:name=".forgotPassword"/>
         <activity android:name=".registerOption"/>
 

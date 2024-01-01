@@ -1,9 +1,11 @@
 package com.example.primelaundryfyp.Driver;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.LandingPage.homepageDriver;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +32,8 @@ import java.util.Map;
 public class driverProfile extends AppCompatActivity {
 
     private TextView nameCall, emailCall, licenseNumCall, icNumCall;
+
+    private ImageView primeLaundryLogoHome12, historyLogo12, bookingLogo12, accountLogo13;
     private Button saveEditProfileDriver;
     private EditText phoneNumEditTextDriver, addressEditTextDriver;
     private FirebaseAuth firebaseAuth;
@@ -88,6 +93,42 @@ public class driverProfile extends AppCompatActivity {
                         Toast.makeText(driverProfile.this, "Save unsuccessful", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        primeLaundryLogoHome12 = findViewById(R.id.primeLaundryLogoHome12);
+        primeLaundryLogoHome12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(driverProfile.this, homepageDriver.class);
+                startActivity(intent);
+            }
+        });
+
+        historyLogo12 = findViewById(R.id.historyLogo12);
+        historyLogo12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(driverProfile.this, driverJobHistory.class);
+                startActivity(intent);
+            }
+        });
+
+        bookingLogo12 = findViewById(R.id.bookingLogo12);
+        bookingLogo12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(driverProfile.this, driverJobInfo.class);
+                startActivity(intent);
+            }
+        });
+
+        accountLogo13 = findViewById(R.id.accountLogo13);
+        accountLogo13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(driverProfile.this, driverProfile.class);
+                startActivity(intent);
             }
         });
     }
