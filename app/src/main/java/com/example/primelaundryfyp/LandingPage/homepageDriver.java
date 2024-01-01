@@ -1,27 +1,37 @@
 package com.example.primelaundryfyp.LandingPage;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
-import com.example.primelaundryfyp.Customer.booking;
+import com.example.primelaundryfyp.Driver.driverCurrentJob;
+import com.example.primelaundryfyp.Driver.driverJobHistory;
+import com.example.primelaundryfyp.Driver.driverJobInfo;
 import com.example.primelaundryfyp.Driver.driverProfile;
-import com.example.primelaundryfyp.Driver.driverStatus;
-import com.example.primelaundryfyp.Driver.pickupDelivery;
 import com.example.primelaundryfyp.R;
 
 public class homepageDriver extends AppCompatActivity {
 
-    private ImageView primeLaundryLogoHome5, historyLogo5, bookingLogo5, statusLogo5, accountLogo6;
+    private ImageView primeLaundryLogoHome5, historyLogo5, bookingLogo5, accountLogo6;
+    private CardView cardViewJobList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage_driver);
+
+        cardViewJobList = findViewById(R.id.cardViewJobList);
+        cardViewJobList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(homepageDriver.this, driverJobInfo.class);
+                startActivity(intent);
+            }
+        });
 
         primeLaundryLogoHome5 = findViewById(R.id.primeLaundryLogoHome5);
         primeLaundryLogoHome5.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +46,7 @@ public class homepageDriver extends AppCompatActivity {
         historyLogo5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(homepageDriver.this, homepageDriver.class);
+                Intent intent = new Intent(homepageDriver.this, driverJobHistory.class);
                 startActivity(intent);
             }
         });
@@ -45,20 +55,11 @@ public class homepageDriver extends AppCompatActivity {
         bookingLogo5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(homepageDriver.this, pickupDelivery.class);
+                Intent intent = new Intent(homepageDriver.this, driverCurrentJob.class);
                 startActivity(intent);
             }
         });
 
-
-        statusLogo5 = findViewById(R.id.statusLogo5);
-        statusLogo5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(homepageDriver.this, driverStatus.class);
-                startActivity(intent);
-            }
-        });
 
         accountLogo6 = findViewById(R.id.accountLogo6);
         accountLogo6.setOnClickListener(new View.OnClickListener() {

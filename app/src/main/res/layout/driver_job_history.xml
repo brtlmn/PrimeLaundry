@@ -1,10 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/accountLogo4"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/job3"
+        android:layout_width="29dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="144dp"
+        android:text="Job"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookingLogo6" />
+
+    <ImageView
+        android:id="@+id/primeLaundryLogoHome6"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="644dp"
+        android:background="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/history6"
+        android:layout_width="45dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="212dp"
+        android:text="History"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyLogo6" />
+
+    <ImageView
+        android:id="@+id/historyLogo6"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/history"
+        app:layout_constraintEnd_toStartOf="@+id/bookingLogo6"
+        app:layout_constraintStart_toEndOf="@+id/primeLaundryLogoHome6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home6"
+        android:layout_width="42dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="4dp"
+        android:text="Home"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/primeLaundryLogoHome6" />
+
+    <ImageView
+        android:id="@+id/bookingLogo6"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/booking"
+        app:layout_constraintEnd_toStartOf="@+id/accountLogo4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/account6"
+        android:layout_width="52dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="48dp"
+        android:text="Account"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountLogo4" />
+
+    <TextView
+        android:id="@+id/historyList2"
+        android:layout_width="278dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:text="History List"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAppsName10" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewJobList"
@@ -19,7 +121,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyList">
+        app:layout_constraintTop_toBottomOf="@+id/historyList2">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -206,113 +308,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/account5"
-        android:layout_width="52dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="48dp"
-        android:text="Account"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountLogo6" />
-
-    <ImageView
-        android:id="@+id/accountLogo6"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="644dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/account"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/primeLaundryLogoHome5"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="644dp"
-        android:background="@drawable/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/history5"
-        android:layout_width="45dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="212dp"
-        android:text="History"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyLogo5" />
-
-    <TextView
-        android:id="@+id/home5"
-        android:layout_width="42dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="4dp"
-        android:text="Home"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/primeLaundryLogoHome5" />
-
-    <TextView
-        android:id="@+id/job"
-        android:layout_width="29dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="148dp"
-        android:text="Job"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookingLogo5" />
-
-    <ImageView
-        android:id="@+id/bookingLogo5"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="644dp"
-        android:layout_marginEnd="28dp"
-        android:background="@drawable/booking"
-        app:layout_constraintEnd_toStartOf="@+id/accountLogo6"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/historyLogo5"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="644dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/history"
-        app:layout_constraintEnd_toStartOf="@+id/bookingLogo5"
-        app:layout_constraintStart_toEndOf="@+id/primeLaundryLogoHome5"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/historyList"
-        android:layout_width="278dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:text="Job List"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textAppsName4" />
-    <!--// Order yang driver dah accept. -->
-
-
-    <TextView
-        android:id="@+id/textAppsName4"
+        android:id="@+id/textAppsName10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -325,5 +321,4 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

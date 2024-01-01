@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/accountLogo3"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/history2"
+        android:layout_width="45dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="212dp"
+        android:text="History"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyLogo2" />
+
+    <ImageView
+        android:id="@+id/primeLaundryLogoHome2"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="644dp"
+        android:background="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home2"
+        android:layout_width="42dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="4dp"
+        android:text="Home"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/primeLaundryLogoHome2" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewJobList"
@@ -18,8 +60,9 @@
         app:cardElevation="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyList">
+        app:layout_constraintTop_toBottomOf="@+id/jobInfo">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -206,7 +249,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/account5"
+        android:id="@+id/account2"
         android:layout_width="52dp"
         android:layout_height="21dp"
         android:layout_marginTop="4dp"
@@ -214,76 +257,32 @@
         android:text="Account"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountLogo6" />
+        app:layout_constraintTop_toBottomOf="@+id/accountLogo3" />
 
     <ImageView
-        android:id="@+id/accountLogo6"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="644dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/account"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/primeLaundryLogoHome5"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="644dp"
-        android:background="@drawable/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/history5"
-        android:layout_width="45dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="212dp"
-        android:text="History"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyLogo5" />
-
-    <TextView
-        android:id="@+id/home5"
-        android:layout_width="42dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="4dp"
-        android:text="Home"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/primeLaundryLogoHome5" />
-
-    <TextView
-        android:id="@+id/job"
-        android:layout_width="29dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="148dp"
-        android:text="Job"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookingLogo5" />
-
-    <ImageView
-        android:id="@+id/bookingLogo5"
+        android:id="@+id/bookingLogo2"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="644dp"
         android:layout_marginEnd="28dp"
         android:background="@drawable/booking"
-        app:layout_constraintEnd_toStartOf="@+id/accountLogo6"
+        app:layout_constraintEnd_toStartOf="@+id/accountLogo3"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/job2"
+        android:layout_width="29dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="144dp"
+        android:text="Job"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookingLogo2" />
+
     <ImageView
-        android:id="@+id/historyLogo5"
+        android:id="@+id/historyLogo2"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_centerHorizontal="true"
@@ -291,28 +290,26 @@
         android:layout_marginTop="644dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/history"
-        app:layout_constraintEnd_toStartOf="@+id/bookingLogo5"
-        app:layout_constraintStart_toEndOf="@+id/primeLaundryLogoHome5"
+        app:layout_constraintEnd_toStartOf="@+id/bookingLogo2"
+        app:layout_constraintStart_toEndOf="@+id/primeLaundryLogoHome2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/historyList"
+        android:id="@+id/jobInfo"
         android:layout_width="278dp"
         android:layout_height="43dp"
         android:layout_marginTop="16dp"
-        android:text="Job List"
+        android:text="Job Info"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textAppsName4" />
-    <!--// Order yang driver dah accept. -->
-
+        app:layout_constraintTop_toBottomOf="@+id/textAppsName6" />
 
     <TextView
-        android:id="@+id/textAppsName4"
+        android:id="@+id/textAppsName6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -326,4 +323,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/acceptance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="253dp"
+        android:layout_marginEnd="100dp"
+        android:text="Accept"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewJobList" />
 </androidx.constraintlayout.widget.ConstraintLayout>

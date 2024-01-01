@@ -10,6 +10,6 @@ public class driverStatus extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.driver_status);
+        setContentView(R.layout.driver_job_info);
     }
 }
