@@ -30,6 +30,8 @@
         <activity android:name=".Customer.registerCustomer"/>
         <activity android:name=".Customer.scheduleCollection"/>
         <activity android:name=".Customer.statusCustomer"/>
+        <activity android:name=".Customer.customerList"/>
+        <activity android:name=".Customer.viewStatusCustomer"/>
         <activity android:name=".Driver.driverProfile"/>
         <activity android:name=".Driver.pickupDelivery"/>
         <activity android:name=".Driver.registerDriver"/>

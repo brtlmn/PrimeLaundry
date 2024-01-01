@@ -194,7 +194,7 @@ public class scheduleCollection extends AppCompatActivity {
                         subTotal += 3.8;
                     }
                     if (type.equals("FOLD")){
-                        fold = "fold";
+                        fold = "Fold";
                         subTotal += 1.5;
                     }
                     if (type.equals("WASH AND DRY")){
@@ -202,7 +202,7 @@ public class scheduleCollection extends AppCompatActivity {
                         subTotal += 3.5;
                     }
                     if (type.equals("IRON")){
-                        iron = "iron";
+                        iron = "Iron";
                         subTotal += 1.8;
                     }
                 }

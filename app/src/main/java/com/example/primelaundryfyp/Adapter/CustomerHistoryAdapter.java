@@ -10,8 +10,10 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.primelaundryfyp.Interface.SelectListener;
 import com.example.primelaundryfyp.Model.Booking;
 import com.example.primelaundryfyp.R;
 
@@ -21,10 +23,11 @@ public class CustomerHistoryAdapter extends RecyclerView.Adapter<CustomerHistory
 
     private LayoutInflater layoutInflater;
     private List<Booking> data;
-    public CustomerHistoryAdapter(Context context, List<Booking> data) {
+    private SelectListener selectListener;
+    public CustomerHistoryAdapter(Context context, List<Booking> data, SelectListener selectListener) {
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
-
+        this.selectListener = selectListener;
     }
     @NonNull
     @Override
@@ -42,6 +45,13 @@ public class CustomerHistoryAdapter extends RecyclerView.Adapter<CustomerHistory
         holder.pickupTime.setText(booking.getPickup_time());
         holder.deliveryTime.setText(booking.getDelivery_time());
         holder.total.setText(booking.getTotal());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectListener.onItemClicked(data.get(position));
+            }
+        });
     }
 
     @Override
@@ -52,6 +62,7 @@ public class CustomerHistoryAdapter extends RecyclerView.Adapter<CustomerHistory
     public class  ViewHolder extends  RecyclerView.ViewHolder {
 
         TextView laundryShop, pickupDate,deliveryDate,pickupTime, deliveryTime,total;
+        public CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             laundryShop = itemView.findViewById(R.id.laundryShop);
@@ -60,6 +71,7 @@ public class CustomerHistoryAdapter extends RecyclerView.Adapter<CustomerHistory
             pickupTime = itemView.findViewById(R.id.pickupTime);
             deliveryTime = itemView.findViewById(R.id.deliveryTime);
             total = itemView.findViewById(R.id.total);
+            cardView = itemView.findViewById(R.id.historyCard);
         }
     }
 }

@@ -61,11 +61,12 @@ public class customerProfile extends AppCompatActivity {
         firebaseService.getUser(user.getUid(), new FirebaseService.RetrievalListener<DocumentSnapshot>() {
             @Override
             public void onRetrieved(DocumentSnapshot model) {
-                name.setText(model.getString("name"));
+                User user = model.toObject(User.class);
+                name.setText(user.getName());
                 emailCall.setText(user.getEmail());
-                phoneNumEditText.setText(model.getString("phone_number"));
-                addressEditText.setText(model.getString("address"));
-                customerProfile.setText(model.getString("user_type"));
+                phoneNumEditText.setText(user.getPhone_number());
+                addressEditText.setText(user.getAddress());
+                customerProfile.setText(user.getUser_type());
             }
 
             @Override

@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.Constant;
 import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.Model.customerModel;
@@ -188,7 +189,7 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
     private void readDataFromFirebase() {
         CollectionReference usersCollection = firebaseFirestore.collection("Users");
 
-        usersCollection.whereEqualTo("user_type", new User().TYPE_SHOP)
+        usersCollection.whereEqualTo("userType", new Constant().TYPE_SHOP)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

@@ -62,15 +62,15 @@ public class MainActivity extends AppCompatActivity {
                             firebasefirestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    String userType = documentSnapshot.getString("user_type");
+                                    String userType = documentSnapshot.getString("userType");
                                     if (userType != null) {
-                                        if (userType.equals(new User().TYPE_CUSTOMER)) {
+                                        if (userType.equals(new Constant().TYPE_CUSTOMER)) {
                                             setUICustomer();
-                                        } else if (userType.equals(new User().TYPE_DRIVER)) {
+                                        } else if (userType.equals(new Constant().TYPE_DRIVER)) {
                                             setUIDriver();
-                                        } else if (userType.equals(new User().TYPE_SHOP)) {
+                                        } else if (userType.equals(new Constant().TYPE_SHOP)) {
                                             setUIShop();
-                                        } else if (userType.equals(new User().TYPE_ADMIN)) {
+                                        } else if (userType.equals(new Constant().TYPE_ADMIN)) {
                                             setUIAdmin();
                                         }
                                     } else {

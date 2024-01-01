@@ -6,23 +6,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 public class User {
-
-    public final String TYPE_CUSTOMER = "customer";
-    public final String TYPE_SHOP = "shop";
-    public final String TYPE_DRIVER = "driver";
-    public final String TYPE_ADMIN = "admin";
-    private String user_id, address, name, phone_number, user_type, password, email;
+    private String id, address, name, phone_number, user_type, password, email;
 
     public User(){
 
     }
-    public User(String user_id, String address, String name, String phone_number, String user_type, String password, String email){
+    public User(String id, String address, String name, String phone_number, String user_type, String email){
         this.address = address;
         this.name = name;
         this.phone_number = phone_number;
         this.user_type = user_type;
-        this.user_id = user_id;
-        this.password = password;
+        this.id = id;
         this.email = email;
     }
 
@@ -34,22 +28,22 @@ public class User {
         return name;
     }
 
-    public String getPhoneNumber() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public String getUserType() {
+    public String getUser_type() {
         return user_type;
     }
 
-    public String getUserId() {return user_id;}
+    public String getId() {return id;}
 
     public  String getPassword(){return password;}
 
     public String getEmail() {return email;}
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setId(String user_id) {
+        this.id = user_id;
     }
 
     public void setAddress(String address) {

@@ -8,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.primelaundryfyp.Adapter.UserListAdapter;
+import com.example.primelaundryfyp.Customer.customerList;
+import com.example.primelaundryfyp.FirebaseService;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.Model.shopModel;
 import com.example.primelaundryfyp.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -22,48 +26,50 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class shopList extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    DocumentReference documentReference;
-    shopAdapter shopadapter;
-    ArrayList <shopModel> list;
-    private FirebaseDatabase firebasedatabase;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference shopCollection = db.collection("Users");
-
-
+    private FirebaseService firebaseService;
+    private ArrayList<User> users;
+    UserListAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((R.layout.shop_list));
 
+        firebaseService = new FirebaseService();
+        users = new ArrayList<>();
+        firebaseService.getShops(new FirebaseService.RetrievalListener<List<DocumentSnapshot>>() {
+            @Override
+            public void onRetrieved(List<DocumentSnapshot> model) {
+                for(DocumentSnapshot m : model) {
+                    User user = m.toObject(User.class);
+                    users.add(user);
+                }
 
+                recyclerView = findViewById(R.id.shopRecyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(shopList.this));
+                adapter = new UserListAdapter(shopList.this, users);
+                recyclerView.setAdapter(adapter);
+            }
 
-        recyclerView = findViewById(R.id.shopRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            @Override
+            public void onNotFound() {
+                System.out.println("Not found");
+            }
 
-        FirestoreRecyclerOptions<shopModel> options =
-                new FirestoreRecyclerOptions.Builder<shopModel>()
-                        .setQuery(shopCollection.whereEqualTo("UserType","Shop"), shopModel.class).build();
-        shopadapter = new shopAdapter(options);
-        recyclerView.setAdapter(shopadapter);
+            @Override
+            public void onFailRetrieval(Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        shopadapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        shopadapter.stopListening();
-    }
 }

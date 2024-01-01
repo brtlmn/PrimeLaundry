@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.Constant;
 import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.MainActivity;
 import com.example.primelaundryfyp.Model.User;
@@ -59,7 +60,7 @@ public class registerDriver2 extends AppCompatActivity {
                 userModel.setPassword(password);
                 userModel.setAddress(address);
                 userModel.setPhone_number(phoneNumber);
-                userModel.setUser_type(userModel.TYPE_DRIVER);
+                userModel.setUser_type(new Constant().TYPE_DRIVER);
 
                 firebaseService.addUser(userModel, new FirebaseService.FirebaseListener() {
                     @Override

@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.primelaundryfyp.Constant;
 import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.MainActivity;
 import com.example.primelaundryfyp.Model.User;
@@ -50,7 +51,7 @@ public class registerCustomer extends AppCompatActivity {
                 newUser.setPassword(password);
                 newUser.setAddress(address);
                 newUser.setPhone_number(phoneNumber);
-                newUser.setUser_type(newUser.TYPE_CUSTOMER);
+                newUser.setUser_type(new Constant().TYPE_CUSTOMER);
                 firebaseService.addUser(newUser, new FirebaseService.FirebaseListener() {
                     @Override
                     public void onSuccess() {

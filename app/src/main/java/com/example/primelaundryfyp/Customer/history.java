@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.primelaundryfyp.Adapter.CustomerHistoryAdapter;
+import com.example.primelaundryfyp.Constant;
 import com.example.primelaundryfyp.FirebaseService;
+import com.example.primelaundryfyp.Interface.SelectListener;
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
 import com.example.primelaundryfyp.Model.Booking;
 import com.example.primelaundryfyp.R;
@@ -28,7 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class history extends AppCompatActivity{
+public class history extends AppCompatActivity implements SelectListener {
 
         private ImageView primeLaundryLogoHome5, historyLogo5, bookingLogo5, statusLogo5, accountLogo6;
         private FirebaseAuth firebaseAuth;
@@ -53,7 +55,7 @@ public class history extends AppCompatActivity{
             user = firebaseAuth.getCurrentUser();
 
 
-            firebaseService.getBookingsByCustomer(user.getUid(), new FirebaseService.RetrievalListener<List<DocumentSnapshot>>() {
+            firebaseService.getDoneBookingsByCustomer(user.getUid(), new FirebaseService.RetrievalListener<List<DocumentSnapshot>>() {
                 @Override
                 public void onRetrieved(List<DocumentSnapshot> model) {
                     for (DocumentSnapshot m : model){
@@ -63,7 +65,7 @@ public class history extends AppCompatActivity{
 
                     recyclerView = findViewById(R.id.cycleView);
                     recyclerView.setLayoutManager(new LinearLayoutManager(history.this));
-                    adapter = new CustomerHistoryAdapter(history.this, items);
+                    adapter = new CustomerHistoryAdapter(history.this, items, history.this);
                     recyclerView.setAdapter(adapter);
                 }
 
@@ -124,4 +126,9 @@ public class history extends AppCompatActivity{
                 }
             });
         }
+
+    @Override
+    public void onItemClicked(Booking booking) {
+
+    }
 }

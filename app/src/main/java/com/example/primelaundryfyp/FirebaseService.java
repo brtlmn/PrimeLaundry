@@ -25,6 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.core.FirestoreClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class FirebaseService {
     public void getCustomers(RetrievalListener<List<DocumentSnapshot>> listener) {
         CollectionReference collectionReference = firestore.collection("Users");
 
-        collectionReference.whereEqualTo("user_type", new User().TYPE_CUSTOMER)
+        collectionReference.whereEqualTo("userType", new Constant().TYPE_CUSTOMER)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     listener.onRetrieved(queryDocumentSnapshots.getDocuments());
@@ -66,7 +67,7 @@ public class FirebaseService {
     public void getDrivers(RetrievalListener<List<DocumentSnapshot>> listener) {
         CollectionReference collectionReference = firestore.collection("Users");
 
-        collectionReference.whereEqualTo("user_type", new User().TYPE_DRIVER)
+        collectionReference.whereEqualTo("userType", new Constant().TYPE_DRIVER)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     listener.onRetrieved(queryDocumentSnapshots.getDocuments());
@@ -79,7 +80,7 @@ public class FirebaseService {
     public void getShops(RetrievalListener<List<DocumentSnapshot>> listener) {
         CollectionReference collectionReference = firestore.collection("Users");
 
-        collectionReference.whereEqualTo("user_type", new User().TYPE_SHOP)
+        collectionReference.whereEqualTo("userType", new Constant().TYPE_SHOP)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     listener.onRetrieved(queryDocumentSnapshots.getDocuments());
@@ -94,13 +95,9 @@ public class FirebaseService {
             @Override
             public void onSuccess(AuthResult authResult) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                DocumentReference usersCollection = firestore.collection("Users").document(firebaseUser.getUid());
-                Map<String, Object> userData = new HashMap<>();
-                userData.put("name", user.getName());
-                userData.put("address", user.getAddress());
-                userData.put("phone_number", user.getPhoneNumber());
-                userData.put("user_type", user.getUserType());
-                usersCollection.set(userData)
+                user.setId(firebaseUser.getUid());
+                DocumentReference usersCollection = firestore.collection("Users").document(user.getId());
+                usersCollection.set(user)
                         .addOnSuccessListener(aVoid -> {
                             listener.onSuccess();
                         })
@@ -121,13 +118,9 @@ public class FirebaseService {
             @Override
             public void onSuccess(AuthResult authResult) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                DocumentReference usersCollection = firestore.collection("Users").document(firebaseUser.getUid());
-                Map<String, Object> userData = new HashMap<>();
-                userData.put("name", user.getName());
-                userData.put("address", user.getAddress());
-                userData.put("phone_number", user.getPhoneNumber());
-                userData.put("user_type", user.getUserType());
-                usersCollection.set(userData);
+                user.setId(firebaseUser.getUid());
+                DocumentReference usersCollection = firestore.collection("Users").document(user.getId());
+                usersCollection.set(user);
 
                 DocumentReference shopCollection = firestore.collection("Shops").document(firebaseUser.getUid());
                 Map<String, Object> shopInfo = new HashMap<>();
@@ -164,7 +157,7 @@ public class FirebaseService {
     public void getBookings(RetrievalListener<List<DocumentSnapshot>> listener) {
         CollectionReference collectionReference = firestore.collection("Bookings");
 
-        collectionReference.whereEqualTo("user_type", new User().TYPE_SHOP)
+        collectionReference.whereEqualTo("userType", new Constant().TYPE_SHOP)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     listener.onRetrieved(queryDocumentSnapshots.getDocuments());
@@ -174,10 +167,25 @@ public class FirebaseService {
                 });
     }
 
-    public void getBookingsByCustomer(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
+    public void getCurrentBookingsByCustomer(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
         CollectionReference collectionReference = firestore.collection("Bookings");
 
         collectionReference.whereEqualTo("customer_id", customer_id)
+                .whereIn("status",  Arrays.asList(new Constant().STATUS_PENDING, new Constant().STATUS_PICKUP))
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getDoneBookingsByCustomer(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("customer_id", customer_id)
+                .whereEqualTo("status", new Constant().STATUS_DONE)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     listener.onRetrieved(queryDocumentSnapshots.getDocuments());
@@ -206,7 +214,7 @@ public class FirebaseService {
     public void getShopByName(String name, RetrievalListener<List<DocumentSnapshot>> listener) {
         CollectionReference collectionReference = firestore.collection("Users");
 
-        collectionReference.whereEqualTo("user_type", new User().TYPE_SHOP)
+        collectionReference.whereEqualTo("userType", new Constant().TYPE_SHOP)
                 .whereEqualTo("name", name)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {

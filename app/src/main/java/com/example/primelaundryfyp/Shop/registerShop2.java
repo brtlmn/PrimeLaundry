@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.primelaundryfyp.Constant;
 import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.MainActivity;
 import com.example.primelaundryfyp.Model.Shop;
@@ -60,7 +61,7 @@ public class registerShop2 extends AppCompatActivity {
                 userModel.setPassword(password);
                 userModel.setAddress(address);
                 userModel.setPhone_number(phoneNumber);
-                userModel.setUser_type(userModel.TYPE_SHOP);
+                userModel.setUser_type(new Constant().TYPE_SHOP);
 
                 Shop shopModel = new Shop();
                 shopModel.setIc_num(icNumber);

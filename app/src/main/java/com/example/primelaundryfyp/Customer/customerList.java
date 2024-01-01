@@ -10,50 +10,58 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 //
 //import com.example.primelaundryfyp.Admin.usersListAdapter;
+import com.example.primelaundryfyp.Adapter.CustomerHistoryAdapter;
+import com.example.primelaundryfyp.Adapter.UserListAdapter;
+import com.example.primelaundryfyp.FirebaseService;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.Model.customerModel;
 import com.example.primelaundryfyp.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class customerList extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
-//    private usersListAdapter usersListAdapter;
+    private FirebaseService firebaseService;
+    private ArrayList<User> users;
+    UserListAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_list);
 
-        recyclerView = findViewById(R.id.customerRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        firebaseService = new FirebaseService();
+        users = new ArrayList<>();
+        firebaseService.getCustomers(new FirebaseService.RetrievalListener<List<DocumentSnapshot>>() {
+            @Override
+            public void onRetrieved(List<DocumentSnapshot> model) {
+                for(DocumentSnapshot m : model) {
+                    User user = m.toObject(User.class);
+                    users.add(user);
+                }
 
-        // Sample data for demonstration
-        ArrayList<customerModel> customerList = generateSampleData();
+                recyclerView = findViewById(R.id.customerRecyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(customerList.this));
+                adapter = new UserListAdapter(customerList.this, users);
+                recyclerView.setAdapter(adapter);
+            }
 
-        // Create and set the adapter
-//        usersListAdapter = new usersListAdapter(customerList.this , customerList,  new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(Customer customer) {
-//                // Handle item click here
-//                Toast.makeText(customerList.this, "Clicked on customer: " + customer.getName(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        recyclerView.setAdapter(usersListAdapter);
+            @Override
+            public void onNotFound() {
+                System.out.println("Not found");
+            }
+
+            @Override
+            public void onFailRetrieval(Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
     }
-
-    private ArrayList<customerModel> generateSampleData() {
-        ArrayList<customerModel> customerList = new ArrayList<>();
-        // Add sample customers to the list
-        customerList.add(new customerModel("UMP", "Abu", "012", "Customer" ));
-        customerList.add(new customerModel("UMP", "Ali", "015", "Customer" ));
-        customerList.add(new customerModel("UMP", "Siti", "013", "Customer" ));
-        customerList.add(new customerModel("UMP", "Fatimah", "014", "Customer" ));
-        customerList.add(new customerModel("UMP", "Humairah", "017", "Customer" ));
-        // Add more customers as needed
-        return customerList;
-    }
-
 }
 

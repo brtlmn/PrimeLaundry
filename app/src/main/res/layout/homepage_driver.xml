@@ -325,7 +325,7 @@
         android:layout_width="278dp"
         android:layout_height="43dp"
         android:layout_marginTop="16dp"
-        android:text="History List"
+        android:text="Job List"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
