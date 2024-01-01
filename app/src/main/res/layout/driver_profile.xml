@@ -194,16 +194,6 @@
             app:layout_constraintTop_toBottomOf="@+id/accountLogo2" />
 
         <TextView
-            android:id="@+id/licenseNumCall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="2dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/licenseNumber"
-            app:layout_constraintTop_toBottomOf="@+id/addressEditTextDriver" />
-
-        <TextView
             android:id="@+id/emailAccount2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -237,16 +227,6 @@
             app:layout_constraintTop_toBottomOf="@+id/emailAccount2" />
 
 
-        <TextView
-            android:id="@+id/licenseNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="68dp"
-            android:layout_marginTop="16dp"
-            android:text="LICENSE NUM:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addressCustProf" />
-
         <EditText
             android:id="@+id/addressEditTextDriver"
             android:layout_width="157dp"
@@ -258,27 +238,6 @@
             android:text="Name"
             app:layout_constraintStart_toEndOf="@+id/addressCustProf"
             app:layout_constraintTop_toBottomOf="@+id/phoneNumEditTextDriver" />
-
-        <TextView
-            android:id="@+id/icNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="68dp"
-            android:layout_marginTop="16dp"
-            android:text="IC NUM:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/licenseNumber" />
-
-
-        <TextView
-            android:id="@+id/icNumCall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/icNum"
-            app:layout_constraintTop_toBottomOf="@+id/licenseNumCall" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

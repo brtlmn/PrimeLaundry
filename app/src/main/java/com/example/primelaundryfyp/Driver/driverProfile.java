@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.LandingPage.homepageDriver;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +41,7 @@ public class driverProfile extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser driver;
+    private FirebaseService firebaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,26 +52,33 @@ public class driverProfile extends AppCompatActivity {
         emailCall = findViewById(R.id.emailCall);
         phoneNumEditTextDriver = findViewById(R.id.phoneNumEditTextDriver);
         addressEditTextDriver = findViewById(R.id.addressEditTextDriver);
-        licenseNumCall = findViewById(R.id.licenseNumCall);
-        icNumCall = findViewById(R.id.icNumCall);
         saveEditProfileDriver = findViewById(R.id.saveEditProfileDriver);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
         firebasefirestore = FirebaseFirestore.getInstance();
         driver = firebaseAuth.getCurrentUser();
+        firebaseService = new FirebaseService();
 
-        DocumentReference documentReference = firebasefirestore.collection("Users").document(driver.getUid());
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        firebaseService.getUser(driver.getUid(), new FirebaseService.RetrievalListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                String userPhoneNum = documentSnapshot.getString("PhoneNumber");
-                String userAddress = documentSnapshot.getString("Address");
-                nameCall.setText(documentSnapshot.getString("Name"));
-                emailCall.setText(driver.getEmail());
-                phoneNumEditTextDriver.setText(userPhoneNum);
-                addressEditTextDriver.setText(userAddress);
-                licenseNumCall.setText(documentSnapshot.getString("LicenseNumber"));
-                icNumCall.setText(documentSnapshot.getString("ICNum"));
+            public void onRetrieved(DocumentSnapshot model) {
+                User user = model.toObject(User.class);
+                nameCall.setText(user.getName());
+                emailCall.setText(user.getEmail());
+                phoneNumEditTextDriver.setText(user.getPhone_number());
+                addressEditTextDriver.setText(user.getAddress());
+//                licenseNumCall.setText(documentSnapshot.getString("LicenseNumber"));
+//                icNumCall.setText(documentSnapshot.getString("ICNum"));
+            }
+
+            @Override
+            public void onNotFound() {
+
+            }
+
+            @Override
+            public void onFailRetrieval(Exception e) {
+
             }
         });
 
@@ -80,8 +90,8 @@ public class driverProfile extends AppCompatActivity {
 
                 DocumentReference df = firebasefirestore.collection("Users").document(driver.getUid());
                 Map<String, Object> edit = new HashMap<>();
-                edit.put("PhoneNumber", pNum);
-                edit.put("Address", address);
+                edit.put("phone_number", pNum);
+                edit.put("address", address);
                 df.update(edit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

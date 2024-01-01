@@ -57,7 +57,7 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
         washDryCheckBox = findViewById(R.id.washDryCheckBox);
         ironCheckBox = findViewById(R.id.ironCheckBox);
         scheduleCollection = findViewById(R.id.scheduleCollection);
-        laundryShop = findViewById(R.id.laundryShop);
+        laundryShop = findViewById(R.id.customerName);
 
         userList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,userList);

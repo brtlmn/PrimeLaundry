@@ -194,16 +194,6 @@
 
 
     <TextView
-        android:id="@+id/ssmNumCall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/ssmNumber"
-        app:layout_constraintTop_toBottomOf="@+id/addressEditTextShop" />
-
-    <TextView
         android:id="@+id/emailAccount2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -236,16 +226,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailAccount2" />
 
-    <TextView
-        android:id="@+id/ssmNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="34dp"
-        android:text="ssm NUM:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressCustProf" />
-
     <EditText
         android:id="@+id/addressEditTextShop"
         android:layout_width="184dp"
@@ -257,27 +237,6 @@
         android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/addressCustProf"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumEditTextShop" />
-
-    <TextView
-        android:id="@+id/icNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="22dp"
-        android:text="IC NUM:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ssmNumber" />
-
-
-    <TextView
-        android:id="@+id/icNumCall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/icNum"
-        app:layout_constraintTop_toBottomOf="@+id/ssmNumCall" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

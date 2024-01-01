@@ -7,17 +7,72 @@ import android.widget.Button;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.primelaundryfyp.LandingPage.homepageShop;
-import com.example.primelaundryfyp.R;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class shopHistory extends AppCompatActivity {
+import com.example.primelaundryfyp.Adapter.CustomerHistoryAdapter;
+import com.example.primelaundryfyp.Customer.history;
+import com.example.primelaundryfyp.FirebaseService;
+import com.example.primelaundryfyp.Interface.SelectListener;
+import com.example.primelaundryfyp.LandingPage.homepageShop;
+import com.example.primelaundryfyp.Model.Booking;
+import com.example.primelaundryfyp.R;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class shopHistory extends AppCompatActivity implements SelectListener {
 
         private ImageView primeLaundryLogoHome10, historyLogo10, bookingLogo10, accountLogo11;
+        private FirebaseAuth firebaseAuth;
+        private FirebaseFirestore firebasefirestore;
+        private FirebaseUser user;
+        private FirebaseService firebaseService;
+        private RecyclerView recyclerView;
+        CustomerHistoryAdapter adapter;
+        ArrayList<Booking> items;
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.shop_history);
+
+            items = new ArrayList<>();
+            firebaseService = new FirebaseService();
+            firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseApp.initializeApp(this);
+            firebasefirestore = FirebaseFirestore.getInstance();
+            user = firebaseAuth.getCurrentUser();
+
+            firebaseService.getHistoryBookingsByShop(user.getUid(), new FirebaseService.RetrievalListener<List<DocumentSnapshot>>() {
+                @Override
+                public void onRetrieved(List<DocumentSnapshot> model) {
+                    for (DocumentSnapshot m : model){
+                        Booking booking = m.toObject(Booking.class);
+                        items.add(booking);
+                    }
+
+                    recyclerView = findViewById(R.id.cycleView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(shopHistory.this));
+                    adapter = new CustomerHistoryAdapter(shopHistory.this, items, shopHistory.this);
+                    recyclerView.setAdapter(adapter);
+                }
+
+                @Override
+                public void onNotFound() {
+
+                }
+
+                @Override
+                public void onFailRetrieval(Exception e) {
+
+                }
+            });
 
 
 
@@ -59,7 +114,12 @@ public class shopHistory extends AppCompatActivity {
             });
 
         }
+
+    @Override
+    public void onItemClicked(Booking booking) {
+
     }
+}
 
 
 

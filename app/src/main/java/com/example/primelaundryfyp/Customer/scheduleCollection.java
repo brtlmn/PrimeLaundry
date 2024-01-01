@@ -12,32 +12,24 @@ import android.widget.TimePicker;
 import android.app.TimePickerDialog;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.primelaundryfyp.LandingPage.homepageCustomer;
 import com.example.primelaundryfyp.Constant;
 import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.Model.Booking;
-import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 
 public class scheduleCollection extends AppCompatActivity {

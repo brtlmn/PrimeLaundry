@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primelaundryfyp.FirebaseService;
 import com.example.primelaundryfyp.LandingPage.homepageShop;
+import com.example.primelaundryfyp.Model.User;
 import com.example.primelaundryfyp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,39 +41,41 @@ public class shopProfile extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebasefirestore;
     private FirebaseUser shop;
+    private FirebaseService firebaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_profile);
 
+        firebaseService = new FirebaseService();
         nameCall = findViewById(R.id.nameCall);
         emailCall = findViewById(R.id.emailCall);
         phoneNumEditTextShop = findViewById(R.id.phoneNumEditTextShop);
         addressEditTextShop = findViewById(R.id.addressEditTextShop);
         saveEditProfileShop = findViewById(R.id.saveEditProfileShop);
-        ssmNumCall = findViewById(R.id.ssmNumCall);
-        icNumCall = findViewById(R.id.icNumCall);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
         firebasefirestore = FirebaseFirestore.getInstance();
         shop = firebaseAuth.getCurrentUser(); //semak sini
 
-        DocumentReference documentReference = firebasefirestore.collection("Users").document(shop.getUid()); //semak sini
-        System.out.println(documentReference);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        firebaseService.getUser(shop.getUid(), new FirebaseService.RetrievalListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-//                System.out.println(documentSnapshot);
-                String userPhoneNum = documentSnapshot.getString("PhoneNumber");
-                String userAddress = documentSnapshot.getString("Address"); //untuk edit text
-                nameCall.setText("khairil");
-//                nameCall.setText(documentSnapshot.getString("Name")); //untuk panggil data dari database
-                emailCall.setText(shop.getEmail());
-                phoneNumEditTextShop.setText(userPhoneNum);
-                addressEditTextShop.setText(userAddress);
-                ssmNumCall.setText(documentSnapshot.getString("SSMNumber"));
-                icNumCall.setText(documentSnapshot.getString("ICNum"));
+            public void onRetrieved(DocumentSnapshot model) {
+                User user = model.toObject(User.class);
+                nameCall.setText(user.getName());
+                emailCall.setText(user.getEmail());
+                phoneNumEditTextShop.setText(user.getPhone_number());
+                addressEditTextShop.setText(user.getAddress());
+            }
+
+            @Override
+            public void onNotFound() {
+
+            }
+
+            @Override
+            public void onFailRetrieval(Exception e) {
 
             }
         });
@@ -84,8 +88,8 @@ public class shopProfile extends AppCompatActivity {
 
                 DocumentReference df = firebasefirestore.collection("Users").document(shop.getUid());
                 Map<String, Object> edit = new HashMap<>();
-                edit.put("PhoneNumber", pNum);
-                edit.put("Address", address);
+                edit.put("phone_number", pNum);
+                edit.put("address", address);
                 df.update(edit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

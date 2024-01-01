@@ -181,6 +181,102 @@ public class FirebaseService {
                 });
     }
 
+    public void getPendingBookings(RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("status", new Constant().STATUS_PENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void updateBookingStatusDriver(String bookingId, String driverId, FirebaseListener listener) {
+        DocumentReference bookingsCollection = firestore.collection("Bookings").document(bookingId);
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("status", new Constant().STATUS_PICKUP);
+        updates.put("driver_id", driverId);
+        bookingsCollection.update(updates)
+                .addOnSuccessListener(aVoid -> {
+                    listener.onSuccess();
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFail(e);
+                });
+    }
+
+    public void updateBookingStatusShop(String bookingId, FirebaseListener listener) {
+        DocumentReference bookingsCollection = firestore.collection("Bookings").document(bookingId);
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("status", new Constant().STATUS_DONE);
+        bookingsCollection.update(updates)
+                .addOnSuccessListener(aVoid -> {
+                    listener.onSuccess();
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFail(e);
+                });
+    }
+
+    public void getCurrentBookingsByDriver(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("driver_id", customer_id)
+                .whereIn("status",  Arrays.asList(new Constant().STATUS_PICKUP))
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getHistoryBookingsByDriver(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("driver_id", customer_id)
+                .whereIn("status",  Arrays.asList(new Constant().STATUS_DONE))
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getHistoryBookingsByShop(String shop_id, RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("shop_id", shop_id)
+                .whereIn("status",  Arrays.asList(new Constant().STATUS_DONE))
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
+    public void getCurrentBookingsByShop(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
+        CollectionReference collectionReference = firestore.collection("Bookings");
+
+        collectionReference.whereEqualTo("shop_id", customer_id)
+                .whereIn("status",  Arrays.asList(new Constant().STATUS_PENDING, new Constant().STATUS_PICKUP))
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    listener.onRetrieved(queryDocumentSnapshots.getDocuments());
+                })
+                .addOnFailureListener(e -> {
+                    listener.onFailRetrieval(e);
+                });
+    }
+
     public void getDoneBookingsByCustomer(String customer_id, RetrievalListener<List<DocumentSnapshot>> listener) {
         CollectionReference collectionReference = firestore.collection("Bookings");
 

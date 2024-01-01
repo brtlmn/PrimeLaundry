@@ -5,8 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,7 +63,7 @@ public class CustomerHistoryAdapter extends RecyclerView.Adapter<CustomerHistory
         public CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            laundryShop = itemView.findViewById(R.id.laundryShop);
+            laundryShop = itemView.findViewById(R.id.customerName);
             pickupDate = itemView.findViewById(R.id.pickupDate);
             deliveryDate = itemView.findViewById(R.id.deliveryDate);
             pickupTime = itemView.findViewById(R.id.pickupTime);
