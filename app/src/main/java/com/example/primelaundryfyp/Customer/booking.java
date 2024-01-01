@@ -174,7 +174,7 @@ public class booking extends AppCompatActivity implements AdapterView.OnItemSele
     private void readDataFromFirebase() {
         CollectionReference usersCollection = firebaseFirestore.collection("Users");
 
-        usersCollection.whereEqualTo("userType", new Constant().TYPE_SHOP)
+        usersCollection.whereEqualTo("user_type", new Constant().TYPE_SHOP)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
